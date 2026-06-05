@@ -854,7 +854,7 @@ var o=[];var l=Array.isArray(e);for(f=n.s.c;f<=n.e.c;++f)s[f]=ya(f);for(var c=n.
             
             <!-- 单元选择 -->
             <div class="unit-bar">
-                <select id="unit-select" onchange="switchUnit(this.value)" style="width:100%;padding:10px 14px;border:2px solid var(--border);border-radius:12px;font-size:0.95rem;background:var(--card);color:var(--text);cursor:pointer;outline:none;transition:border-color 0.2s;"><option value="全部">📚 全部单词</option><option value="Days of the week">📖 Days of the week</option><option value="Numbers">📖 Numbers</option><option value="Unit 1">📖 Unit 1</option><option value="Unit 2">📖 Unit 2</option><option value="Unit 3">📖 Unit 3</option><option value="Unit 4">📖 Unit 4</option><option value="Unit 5">📖 Unit 5</option><option value="Unit 6">📖 Unit 6</option><option value="Unit 7">📖 Unit 7</option><option value="Unit 8">📖 Unit 8</option></select>
+                <select id="unit-select" onchange="switchUnit(this.value)" style="width:100%;padding:10px 14px;border:2px solid var(--border);border-radius:12px;font-size:0.95rem;background:var(--card);color:var(--text);cursor:pointer;outline:none;transition:border-color 0.2s;"><option value="全部">📚 全部单词</option><option value="Days of the week" selected="">📖 Days of the week</option><option value="Numbers">📖 Numbers</option><option value="Unit 1">📖 Unit 1</option><option value="Unit 2">📖 Unit 2</option><option value="Unit 3">📖 Unit 3</option><option value="Unit 4">📖 Unit 4</option><option value="Unit 5">📖 Unit 5</option><option value="Unit 6">📖 Unit 6</option><option value="Unit 7">📖 Unit 7</option><option value="Unit 8">📖 Unit 8</option></select>
             </div>
             
             <div class="card" id="word-card-container">
@@ -1694,11 +1694,27 @@ var o=[];var l=Array.isArray(e);for(f=n.s.c;f<=n.e.c;++f)s[f]=ya(f);for(var c=n.
 
         // TTS proxy
         function playProxyTTS(text, callback) {
-            const url = window.location.origin + '/tts-proxy?text=' + encodeURIComponent(text);
-            const audio = new Audio(url);
-            audio.onended = callback || null;
-            audio.onerror = function() { if (callback) callback(); };
-            audio.play().catch(function() { if (callback) callback(); });
+            var proxyUrl = window.location.origin + '/tts-proxy?text=' + encodeURIComponent(text);
+            var audio = new Audio(proxyUrl);
+            var proxyDone = false;
+            audio.onended = function() { proxyDone = true; if (callback) callback(); };
+            audio.onerror = function() { if (!proxyDone) fallbackSpeech(text, callback); };
+            audio.play().catch(function() { if (!proxyDone) fallbackSpeech(text, callback); });
+            setTimeout(function() { if (!proxyDone) { audio.pause(); fallbackSpeech(text, callback); } }, 2000);
+        }
+
+        function fallbackSpeech(text, callback) {
+            if ('speechSynthesis' in window) {
+                speechSynthesis.cancel();
+                var u = new SpeechSynthesisUtterance(text);
+                u.lang = 'en-US';
+                u.rate = 1;
+                u.onend = callback || null;
+                u.onerror = function() { if (callback) callback(); };
+                speechSynthesis.speak(u);
+            } else {
+                if (callback) callback();
+            }
         }
 
         async function prevWord() {
