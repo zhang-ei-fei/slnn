@@ -980,7 +980,7 @@ var o=[];var l=Array.isArray(e);for(f=n.s.c;f<=n.e.c;++f)s[f]=ya(f);for(var c=n.
                         <div class="setting-label">新词优先</div>
                         <div class="setting-desc">优先学习未学过的单词</div>
                     </div>
-                    <div class="toggle active" id="new-first-toggle" onclick="toggleSetting(&#39;newFirst&#39;)"></div>
+                    <div class="toggle" id="new-first-toggle" onclick="toggleSetting(&#39;newFirst&#39;)"></div>
                 </div>
                 <div class="setting-item" style="flex-direction: column; align-items: flex-start; gap: 8px;">
                     <div>
@@ -1229,8 +1229,8 @@ var o=[];var l=Array.isArray(e);for(f=n.s.c;f<=n.e.c;++f)s[f]=ya(f);for(var c=n.
         let mediaRecorder = null;
         let audioChunks = [];
         let settings = {
-            autoSpeak: false,
-            newFirst: true,
+            autoSpeak: true,
+            newFirst: false,
             intervals: [1, 3, 7, 14, 30]
         };
         let currentUnit = '全部'; // 当前选择的单元
