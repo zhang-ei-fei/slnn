@@ -845,7 +845,7 @@ var o=[];var l=Array.isArray(e);for(f=n.s.c;f<=n.e.c;++f)s[f]=ya(f);for(var c=n.
             <div class="review-progress">
                 <div class="progress-info">
                     <span>学习进度</span>
-                    <span id="learn-progress-text">0 / 20</span>
+                    <span id="learn-progress-text">0 / 7</span>
                 </div>
                 <div class="progress-bar">
                     <div class="progress-fill" id="learn-progress-bar" style="width: 0%;"></div>
@@ -861,15 +861,15 @@ var o=[];var l=Array.isArray(e);for(f=n.s.c;f<=n.e.c;++f)s[f]=ya(f);for(var c=n.
                 <!-- 单词头部：单词 + 音标 + 发音 -->
                 <div class="study-header">
                     <div class="study-word-info">
-                        <div class="study-word" id="word-text" onclick="speakWord()">three</div>
-                        <div class="study-phonetic" id="word-phonetic">/θriː/</div>
+                        <div class="study-word" id="word-text" onclick="speakWord()">Monday</div>
+                        <div class="study-phonetic" id="word-phonetic">/ˈmʌndeɪ/</div>
                     </div>
                     <button class="study-speak-btn" onclick="speakWord()">🔊</button>
                     <button class="study-speak-btn" id="record-btn" onclick="toggleRecord()" title="口语跟读" style="background:linear-gradient(135deg, #f59e0b, #d97706);">🎤</button>
                 </div>
                 
                 <!-- 中文释义 -->
-                <div class="study-meaning" id="word-meaning">三</div>
+                <div class="study-meaning" id="word-meaning">星期一</div>
                 
                 <!-- 例句区域 -->
                 <div class="study-example">
@@ -877,8 +877,8 @@ var o=[];var l=Array.isArray(e);for(f=n.s.c;f<=n.e.c;++f)s[f]=ya(f);for(var c=n.
                         <span>例句</span>
                         <button class="example-speak-btn" onclick="speakExample()">🔊</button>
                     </div>
-                    <div class="example-english" id="word-example">I have three pens.</div>
-                    <div class="example-chinese" id="word-translation">我有三支钢笔。</div>
+                    <div class="example-english" id="word-example">We go to school on Monday.</div>
+                    <div class="example-chinese" id="word-translation">我们星期一上学。</div>
                 </div>
                 
                 <!-- 操作按钮 -->
@@ -895,13 +895,7 @@ var o=[];var l=Array.isArray(e);for(f=n.s.c;f<=n.e.c;++f)s[f]=ya(f);for(var c=n.
                 </div>
             </div>
             
-            <div class="card hidden" id="unit-complete-msg">
-                <div class="empty-state">
-                    <div class="icon">🎉</div>
-                    <p>「Unit 7」已全部学完！</p>
-                    <p style="font-size:0.85rem;margin-top:4px;">共 18 个单词</p>
-                    <button class="btn btn-primary" style="margin-top:16px;" onclick="retryUnit()">🔄 重新学习本单元</button>
-                </div></div>
+            <div class="card hidden" id="unit-complete-msg"></div>
             
         </section>
         
@@ -918,7 +912,7 @@ var o=[];var l=Array.isArray(e);for(f=n.s.c;f<=n.e.c;++f)s[f]=ya(f);for(var c=n.
             </div>
             
             <div class="card">
-                <div class="word-card hidden" id="review-card">
+                <div class="word-card" id="review-card">
                     <div class="word-main" id="review-word-text" onclick="speakWord()">-</div>
                     <div class="word-phonetic" id="review-word-phonetic">-</div>
                     <div class="word-meaning" id="review-word-meaning">-</div>
@@ -936,7 +930,7 @@ var o=[];var l=Array.isArray(e);for(f=n.s.c;f<=n.e.c;++f)s[f]=ya(f);for(var c=n.
                 </div>
             </div>
             
-            <div class="empty-state" id="review-empty">
+            <div class="empty-state hidden" id="review-empty">
                 <div class="icon">🎉</div>
                 <p>太棒了！今日复习任务已全部完成！</p>
             </div>
@@ -947,7 +941,7 @@ var o=[];var l=Array.isArray(e);for(f=n.s.c;f<=n.e.c;++f)s[f]=ya(f);for(var c=n.
             <div class="card">
                 <div class="card-title">错题本</div>
                 <div class="wrong-list" id="wrong-list"></div>
-                <div class="empty-state" id="wrongbook-empty">
+                <div class="empty-state hidden" id="wrongbook-empty">
                     <div class="icon">✨</div>
                     <p>暂无错题记录，继续保持！</p>
                 </div>
@@ -959,64 +953,12 @@ var o=[];var l=Array.isArray(e);for(f=n.s.c;f<=n.e.c;++f)s[f]=ya(f);for(var c=n.
         <section id="stats-section" class="hidden">
             <div class="chart-container">
                 <div class="chart-title">📈 近7天学习统计</div>
-                <div class="bar-chart" id="weekly-chart">
-                    <div class="bar-item">
-                        <div class="bar" style="height: 0px"></div>
-                        <div class="bar-label">5/30</div>
-                    </div>
-                
-                    <div class="bar-item">
-                        <div class="bar" style="height: 0px"></div>
-                        <div class="bar-label">5/31</div>
-                    </div>
-                
-                    <div class="bar-item">
-                        <div class="bar" style="height: 0px"></div>
-                        <div class="bar-label">6/1</div>
-                    </div>
-                
-                    <div class="bar-item">
-                        <div class="bar" style="height: 0px"></div>
-                        <div class="bar-label">6/2</div>
-                    </div>
-                
-                    <div class="bar-item">
-                        <div class="bar" style="height: 0px"></div>
-                        <div class="bar-label">6/3</div>
-                    </div>
-                
-                    <div class="bar-item">
-                        <div class="bar" style="height: 0px"></div>
-                        <div class="bar-label">6/4</div>
-                    </div>
-                
-                    <div class="bar-item">
-                        <div class="bar" style="height: 120px"></div>
-                        <div class="bar-label">6/5</div>
-                    </div>
-                </div>
+                <div class="bar-chart" id="weekly-chart"></div>
             </div>
             
             <div class="card">
                 <div class="card-title">📋 学习详情</div>
-                <div id="stats-detail">
-                <div class="setting-item">
-                    <span>总学习次数</span>
-                    <strong>18</strong>
-                </div>
-                <div class="setting-item">
-                    <span>已掌握（复习3次以上）</span>
-                    <strong>0</strong>
-                </div>
-                <div class="setting-item">
-                    <span>正在学习</span>
-                    <strong>0</strong>
-                </div>
-                <div class="setting-item">
-                    <span>完全掌握</span>
-                    <strong>0</strong>
-                </div>
-            </div>
+                <div id="stats-detail"></div>
             </div>
             
             <button class="btn btn-danger btn-block" style="margin-top: 16px;" onclick="clearAllData()">⚠️ 清空所有数据</button>
@@ -1049,7 +991,7 @@ var o=[];var l=Array.isArray(e);for(f=n.s.c;f<=n.e.c;++f)s[f]=ya(f);for(var c=n.
                 </div>
             </div></div></div>
             
-            <div class="card settings-card">
+            <div class="card settings-card collapsed">
                 <div class="card-title" style="cursor: pointer;">📦 词库管理</div><div class="card-body"><div class="card-body">
                 <div class="btn-group" style="flex-direction: column;">
                     <button class="btn btn-primary btn-block" onclick="showAddWordModal()">➕ 添加单词</button>
@@ -1094,7 +1036,7 @@ var o=[];var l=Array.isArray(e);for(f=n.s.c;f<=n.e.c;++f)s[f]=ya(f);for(var c=n.
         <!-- 统计栏 -->
         <div class="stats-bar">
             <div class="stat-card">
-                <div class="num" id="stat-total">20</div>
+                <div class="num" id="stat-total">7</div>
                 <div class="label">总词汇</div>
             </div>
             <div class="stat-card">
@@ -1675,7 +1617,6 @@ var o=[];var l=Array.isArray(e);for(f=n.s.c;f<=n.e.c;++f)s[f]=ya(f);for(var c=n.
             
             // 优先未学习的单词
             const unlearned = words.filter(w => w.repetitions === 0);
-            // 按顺序取第一个未学习的单词（保持Excel原始顺序）
             const candidates = unlearned.length > 0 ? unlearned : words;
             currentWord = candidates[0];
             displayWord(currentWord);
@@ -1740,28 +1681,27 @@ var o=[];var l=Array.isArray(e);for(f=n.s.c;f<=n.e.c;++f)s[f]=ya(f);for(var c=n.
         function speakWord() {
             const text = currentWord?.word || currentReviewWord?.word;
             if (!text) return;
-            if ('speechSynthesis' in window) {
-                speechSynthesis.cancel();
-                const utterance = new SpeechSynthesisUtterance(text);
-                utterance.lang = 'en-US';
-                utterance.rate = settings.ttsRate || 1;
-                speechSynthesis.speak(utterance);
-            }
+            playProxyTTS(text, () => {
+                if (settings.autoSpeak) setTimeout(() => speakExample(), 300);
+            });
         }
-        
+
         function speakExample() {
             const text = currentWord?.example;
             if (!text) return;
-            if ('speechSynthesis' in window) {
-                speechSynthesis.cancel();
-                const utterance = new SpeechSynthesisUtterance(text);
-                utterance.lang = 'en-US';
-                utterance.rate = (settings.ttsRate || 1) * 0.8;
-                speechSynthesis.speak(utterance);
-            }
+            playProxyTTS(text);
         }
-        
-async function prevWord() {
+
+        // TTS proxy
+        function playProxyTTS(text, callback) {
+            const url = window.location.origin + '/tts-proxy?text=' + encodeURIComponent(text);
+            const audio = new Audio(url);
+            audio.onended = callback || null;
+            audio.onerror = function() { if (callback) callback(); };
+            audio.play().catch(function() { if (callback) callback(); });
+        }
+
+        async function prevWord() {
             const words = await getWordsByUnit();
             if (words.length === 0) return;
             
