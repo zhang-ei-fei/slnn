@@ -845,7 +845,7 @@ var o=[];var l=Array.isArray(e);for(f=n.s.c;f<=n.e.c;++f)s[f]=ya(f);for(var c=n.
             <div class="review-progress">
                 <div class="progress-info">
                     <span>学习进度</span>
-                    <span id="learn-progress-text">0 / 7</span>
+                    <span id="learn-progress-text">0 / 17</span>
                 </div>
                 <div class="progress-bar">
                     <div class="progress-fill" id="learn-progress-bar" style="width: 0%;"></div>
@@ -854,22 +854,22 @@ var o=[];var l=Array.isArray(e);for(f=n.s.c;f<=n.e.c;++f)s[f]=ya(f);for(var c=n.
             
             <!-- 单元选择 -->
             <div class="unit-bar">
-                <select id="unit-select" onchange="switchUnit(this.value)" style="width:100%;padding:10px 14px;border:2px solid var(--border);border-radius:12px;font-size:0.95rem;background:var(--card);color:var(--text);cursor:pointer;outline:none;transition:border-color 0.2s;"><option value="全部">📚 全部单词</option><option value="Days of the week" selected="">📖 Days of the week</option><option value="Numbers">📖 Numbers</option><option value="Unit 1">📖 Unit 1</option><option value="Unit 2">📖 Unit 2</option><option value="Unit 3">📖 Unit 3</option><option value="Unit 4">📖 Unit 4</option><option value="Unit 5">📖 Unit 5</option><option value="Unit 6">📖 Unit 6</option><option value="Unit 7">📖 Unit 7</option><option value="Unit 8">📖 Unit 8</option></select>
+                <select id="unit-select" onchange="switchUnit(this.value)" style="width:100%;padding:10px 14px;border:2px solid var(--border);border-radius:12px;font-size:0.95rem;background:var(--card);color:var(--text);cursor:pointer;outline:none;transition:border-color 0.2s;"><option value="全部">📚 全部单词</option><option value="Days of the week">📖 Days of the week</option><option value="Numbers">📖 Numbers</option><option value="Unit 1" selected="">📖 Unit 1</option><option value="Unit 2">📖 Unit 2</option><option value="Unit 3">📖 Unit 3</option><option value="Unit 4">📖 Unit 4</option><option value="Unit 5">📖 Unit 5</option><option value="Unit 6">📖 Unit 6</option><option value="Unit 7">📖 Unit 7</option><option value="Unit 8">📖 Unit 8</option></select>
             </div>
             
             <div class="card" id="word-card-container">
                 <!-- 单词头部：单词 + 音标 + 发音 -->
                 <div class="study-header">
                     <div class="study-word-info">
-                        <div class="study-word" id="word-text" onclick="speakWord()">Monday</div>
-                        <div class="study-phonetic" id="word-phonetic">/ˈmʌndeɪ/</div>
+                        <div class="study-word" id="word-text" onclick="speakWord()">our</div>
+                        <div class="study-phonetic" id="word-phonetic">/aʊə(r)/</div>
                     </div>
                     <button class="study-speak-btn" onclick="speakWord()">🔊</button>
                     <button class="study-speak-btn" id="record-btn" onclick="toggleRecord()" title="口语跟读" style="background:linear-gradient(135deg, #f59e0b, #d97706);">🎤</button>
                 </div>
                 
                 <!-- 中文释义 -->
-                <div class="study-meaning" id="word-meaning">星期一</div>
+                <div class="study-meaning" id="word-meaning">我们的</div>
                 
                 <!-- 例句区域 -->
                 <div class="study-example">
@@ -877,8 +877,8 @@ var o=[];var l=Array.isArray(e);for(f=n.s.c;f<=n.e.c;++f)s[f]=ya(f);for(var c=n.
                         <span>例句</span>
                         <button class="example-speak-btn" onclick="speakExample()">🔊</button>
                     </div>
-                    <div class="example-english" id="word-example">We go to school on Monday.</div>
-                    <div class="example-chinese" id="word-translation">我们星期一上学。</div>
+                    <div class="example-english" id="word-example">Our classroom is clean.</div>
+                    <div class="example-chinese" id="word-translation">我们的教室很干净。</div>
                 </div>
                 
                 <!-- 操作按钮 -->
@@ -1036,7 +1036,7 @@ var o=[];var l=Array.isArray(e);for(f=n.s.c;f<=n.e.c;++f)s[f]=ya(f);for(var c=n.
         <!-- 统计栏 -->
         <div class="stats-bar">
             <div class="stat-card">
-                <div class="num" id="stat-total">7</div>
+                <div class="num" id="stat-total">17</div>
                 <div class="label">总词汇</div>
             </div>
             <div class="stat-card">
@@ -1681,42 +1681,31 @@ var o=[];var l=Array.isArray(e);for(f=n.s.c;f<=n.e.c;++f)s[f]=ya(f);for(var c=n.
         function speakWord() {
             const text = currentWord?.word || currentReviewWord?.word;
             if (!text) return;
-            playProxyTTS(text, () => {
-                if (settings.autoSpeak) setTimeout(() => speakExample(), 300);
-            });
+            if ('speechSynthesis' in window) {
+                speechSynthesis.cancel();
+                var u = new SpeechSynthesisUtterance(text);
+                u.lang = 'en-US';
+                u.rate = settings.ttsRate || 1;
+                if (settings.autoSpeak) {
+                    u.onend = function() { setTimeout(function() { speakExample(); }, 300); };
+                }
+                speechSynthesis.speak(u);
+            }
         }
 
         function speakExample() {
             const text = currentWord?.example;
             if (!text) return;
-            playProxyTTS(text);
-        }
-
-        // TTS proxy
-        function playProxyTTS(text, callback) {
-            var proxyUrl = window.location.origin + '/tts-proxy?text=' + encodeURIComponent(text);
-            var audio = new Audio(proxyUrl);
-            var proxyDone = false;
-            audio.onended = function() { proxyDone = true; if (callback) callback(); };
-            audio.onerror = function() { if (!proxyDone) fallbackSpeech(text, callback); };
-            audio.play().catch(function() { if (!proxyDone) fallbackSpeech(text, callback); });
-            setTimeout(function() { if (!proxyDone) { audio.pause(); fallbackSpeech(text, callback); } }, 2000);
-        }
-
-        function fallbackSpeech(text, callback) {
             if ('speechSynthesis' in window) {
                 speechSynthesis.cancel();
                 var u = new SpeechSynthesisUtterance(text);
                 u.lang = 'en-US';
-                u.rate = 1;
-                u.onend = callback || null;
-                u.onerror = function() { if (callback) callback(); };
+                u.rate = (settings.ttsRate || 1) * 0.8;
                 speechSynthesis.speak(u);
-            } else {
-                if (callback) callback();
             }
         }
 
+        // TTS proxy
         async function prevWord() {
             const words = await getWordsByUnit();
             if (words.length === 0) return;
