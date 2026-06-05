@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- saved from url=(0071)https://webview.e2b.gz5.sandbox.cloudstudio.club/smart-english-app.html -->
+<!-- saved from url=(0059)https://webview.e2b.bj8.sandbox.cloudstudio.club/index.html -->
 <html lang="zh-CN"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     
     <title>智能背单词</title>
@@ -845,7 +845,7 @@ var o=[];var l=Array.isArray(e);for(f=n.s.c;f<=n.e.c;++f)s[f]=ya(f);for(var c=n.
             <div class="review-progress">
                 <div class="progress-info">
                     <span>学习进度</span>
-                    <span id="learn-progress-text">0 / 154</span>
+                    <span id="learn-progress-text">0 / 20</span>
                 </div>
                 <div class="progress-bar">
                     <div class="progress-fill" id="learn-progress-bar" style="width: 0%;"></div>
@@ -854,22 +854,22 @@ var o=[];var l=Array.isArray(e);for(f=n.s.c;f<=n.e.c;++f)s[f]=ya(f);for(var c=n.
             
             <!-- 单元选择 -->
             <div class="unit-bar">
-                <select id="unit-select" onchange="switchUnit(this.value)" style="width:100%;padding:10px 14px;border:2px solid var(--border);border-radius:12px;font-size:0.95rem;background:var(--card);color:var(--text);cursor:pointer;outline:none;transition:border-color 0.2s;"><option value="全部">📚 全部单词</option><option value="Unit 1">📖 Unit 1</option><option value="Unit 2">📖 Unit 2</option><option value="Unit 3">📖 Unit 3</option><option value="Unit 4">📖 Unit 4</option><option value="Unit 5">📖 Unit 5</option><option value="Unit 6">📖 Unit 6</option><option value="Unit 7">📖 Unit 7</option><option value="Unit 8">📖 Unit 8</option></select>
+                <select id="unit-select" onchange="switchUnit(this.value)" style="width:100%;padding:10px 14px;border:2px solid var(--border);border-radius:12px;font-size:0.95rem;background:var(--card);color:var(--text);cursor:pointer;outline:none;transition:border-color 0.2s;"><option value="全部">📚 全部单词</option><option value="Days of the week">📖 Days of the week</option><option value="Numbers">📖 Numbers</option><option value="Unit 1">📖 Unit 1</option><option value="Unit 2">📖 Unit 2</option><option value="Unit 3">📖 Unit 3</option><option value="Unit 4">📖 Unit 4</option><option value="Unit 5">📖 Unit 5</option><option value="Unit 6">📖 Unit 6</option><option value="Unit 7">📖 Unit 7</option><option value="Unit 8">📖 Unit 8</option></select>
             </div>
             
             <div class="card" id="word-card-container">
                 <!-- 单词头部：单词 + 音标 + 发音 -->
                 <div class="study-header">
                     <div class="study-word-info">
-                        <div class="study-word" id="word-text" onclick="speakWord()">his</div>
-                        <div class="study-phonetic" id="word-phonetic">/hɪz/</div>
+                        <div class="study-word" id="word-text" onclick="speakWord()">three</div>
+                        <div class="study-phonetic" id="word-phonetic">/θriː/</div>
                     </div>
                     <button class="study-speak-btn" onclick="speakWord()">🔊</button>
                     <button class="study-speak-btn" id="record-btn" onclick="toggleRecord()" title="口语跟读" style="background:linear-gradient(135deg, #f59e0b, #d97706);">🎤</button>
                 </div>
                 
                 <!-- 中文释义 -->
-                <div class="study-meaning" id="word-meaning">他的</div>
+                <div class="study-meaning" id="word-meaning">三</div>
                 
                 <!-- 例句区域 -->
                 <div class="study-example">
@@ -877,8 +877,8 @@ var o=[];var l=Array.isArray(e);for(f=n.s.c;f<=n.e.c;++f)s[f]=ya(f);for(var c=n.
                         <span>例句</span>
                         <button class="example-speak-btn" onclick="speakExample()">🔊</button>
                     </div>
-                    <div class="example-english" id="word-example">His pen is blue.</div>
-                    <div class="example-chinese" id="word-translation">他的钢笔是蓝色的。</div>
+                    <div class="example-english" id="word-example">I have three pens.</div>
+                    <div class="example-chinese" id="word-translation">我有三支钢笔。</div>
                 </div>
                 
                 <!-- 操作按钮 -->
@@ -895,7 +895,13 @@ var o=[];var l=Array.isArray(e);for(f=n.s.c;f<=n.e.c;++f)s[f]=ya(f);for(var c=n.
                 </div>
             </div>
             
-            <div class="card hidden" id="unit-complete-msg"></div>
+            <div class="card hidden" id="unit-complete-msg">
+                <div class="empty-state">
+                    <div class="icon">🎉</div>
+                    <p>「Unit 7」已全部学完！</p>
+                    <p style="font-size:0.85rem;margin-top:4px;">共 18 个单词</p>
+                    <button class="btn btn-primary" style="margin-top:16px;" onclick="retryUnit()">🔄 重新学习本单元</button>
+                </div></div>
             
         </section>
         
@@ -912,7 +918,7 @@ var o=[];var l=Array.isArray(e);for(f=n.s.c;f<=n.e.c;++f)s[f]=ya(f);for(var c=n.
             </div>
             
             <div class="card">
-                <div class="word-card" id="review-card">
+                <div class="word-card hidden" id="review-card">
                     <div class="word-main" id="review-word-text" onclick="speakWord()">-</div>
                     <div class="word-phonetic" id="review-word-phonetic">-</div>
                     <div class="word-meaning" id="review-word-meaning">-</div>
@@ -930,7 +936,7 @@ var o=[];var l=Array.isArray(e);for(f=n.s.c;f<=n.e.c;++f)s[f]=ya(f);for(var c=n.
                 </div>
             </div>
             
-            <div class="empty-state hidden" id="review-empty">
+            <div class="empty-state" id="review-empty">
                 <div class="icon">🎉</div>
                 <p>太棒了！今日复习任务已全部完成！</p>
             </div>
@@ -941,7 +947,7 @@ var o=[];var l=Array.isArray(e);for(f=n.s.c;f<=n.e.c;++f)s[f]=ya(f);for(var c=n.
             <div class="card">
                 <div class="card-title">错题本</div>
                 <div class="wrong-list" id="wrong-list"></div>
-                <div class="empty-state hidden" id="wrongbook-empty">
+                <div class="empty-state" id="wrongbook-empty">
                     <div class="icon">✨</div>
                     <p>暂无错题记录，继续保持！</p>
                 </div>
@@ -953,12 +959,64 @@ var o=[];var l=Array.isArray(e);for(f=n.s.c;f<=n.e.c;++f)s[f]=ya(f);for(var c=n.
         <section id="stats-section" class="hidden">
             <div class="chart-container">
                 <div class="chart-title">📈 近7天学习统计</div>
-                <div class="bar-chart" id="weekly-chart"></div>
+                <div class="bar-chart" id="weekly-chart">
+                    <div class="bar-item">
+                        <div class="bar" style="height: 0px"></div>
+                        <div class="bar-label">5/30</div>
+                    </div>
+                
+                    <div class="bar-item">
+                        <div class="bar" style="height: 0px"></div>
+                        <div class="bar-label">5/31</div>
+                    </div>
+                
+                    <div class="bar-item">
+                        <div class="bar" style="height: 0px"></div>
+                        <div class="bar-label">6/1</div>
+                    </div>
+                
+                    <div class="bar-item">
+                        <div class="bar" style="height: 0px"></div>
+                        <div class="bar-label">6/2</div>
+                    </div>
+                
+                    <div class="bar-item">
+                        <div class="bar" style="height: 0px"></div>
+                        <div class="bar-label">6/3</div>
+                    </div>
+                
+                    <div class="bar-item">
+                        <div class="bar" style="height: 0px"></div>
+                        <div class="bar-label">6/4</div>
+                    </div>
+                
+                    <div class="bar-item">
+                        <div class="bar" style="height: 120px"></div>
+                        <div class="bar-label">6/5</div>
+                    </div>
+                </div>
             </div>
             
             <div class="card">
                 <div class="card-title">📋 学习详情</div>
-                <div id="stats-detail"></div>
+                <div id="stats-detail">
+                <div class="setting-item">
+                    <span>总学习次数</span>
+                    <strong>18</strong>
+                </div>
+                <div class="setting-item">
+                    <span>已掌握（复习3次以上）</span>
+                    <strong>0</strong>
+                </div>
+                <div class="setting-item">
+                    <span>正在学习</span>
+                    <strong>0</strong>
+                </div>
+                <div class="setting-item">
+                    <span>完全掌握</span>
+                    <strong>0</strong>
+                </div>
+            </div>
             </div>
             
             <button class="btn btn-danger btn-block" style="margin-top: 16px;" onclick="clearAllData()">⚠️ 清空所有数据</button>
@@ -967,13 +1025,13 @@ var o=[];var l=Array.isArray(e);for(f=n.s.c;f<=n.e.c;++f)s[f]=ya(f);for(var c=n.
         <!-- 设置页面 -->
         <section id="settings-section" class="hidden">
             <div class="card settings-card">
-                <div class="card-title" style="cursor: pointer;">基本设置</div><div class="card-body">
+                <div class="card-title" style="cursor: pointer;">基本设置</div><div class="card-body"><div class="card-body">
                 <div class="setting-item">
                     <div>
                         <div class="setting-label">自动发音</div>
                         <div class="setting-desc">显示单词时自动朗读</div>
                     </div>
-                    <div class="toggle" id="auto-speak-toggle" onclick="toggleSetting(&#39;autoSpeak&#39;)"></div>
+                    <div class="toggle active" id="auto-speak-toggle" onclick="toggleSetting(&#39;autoSpeak&#39;)"></div>
                 </div>
                 <div class="setting-item">
                     <div>
@@ -989,10 +1047,10 @@ var o=[];var l=Array.isArray(e);for(f=n.s.c;f<=n.e.c;++f)s[f]=ya(f);for(var c=n.
                     </div>
                     <input type="range" id="rate-slider" min="0.5" max="2" step="0.1" value="1" style="width: 100%;" onchange="updateTtsRate(this.value)" oninput="updateTtsRate(this.value)">
                 </div>
-            </div></div>
+            </div></div></div>
             
-            <div class="card settings-card collapsed">
-                <div class="card-title" style="cursor: pointer;">📦 词库管理</div><div class="card-body">
+            <div class="card settings-card">
+                <div class="card-title" style="cursor: pointer;">📦 词库管理</div><div class="card-body"><div class="card-body">
                 <div class="btn-group" style="flex-direction: column;">
                     <button class="btn btn-primary btn-block" onclick="showAddWordModal()">➕ 添加单词</button>
                     <button class="btn btn-outline btn-block" onclick="loadSampleWords()">📥 加载示例词汇</button>
@@ -1001,10 +1059,10 @@ var o=[];var l=Array.isArray(e);for(f=n.s.c;f<=n.e.c;++f)s[f]=ya(f);for(var c=n.
                 </div>
                 <hr style="border: none; border-top: 1px solid var(--border); margin: 16px 0;">
                 <button class="btn btn-outline btn-block" onclick="showWordManagementModal()">🗑️ 管理所有单词</button>
-            </div></div>
+            </div></div></div>
             
             <div class="card settings-card collapsed">
-                <div class="card-title" style="cursor: pointer;">艾宾浩斯复习间隔（天）</div><div class="card-body">
+                <div class="card-title" style="cursor: pointer;">艾宾浩斯复习间隔（天）</div><div class="card-body"><div class="card-body">
                 <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 16px;">
                     首次学习后，按照以下间隔自动安排复习时间
                 </p>
@@ -1030,13 +1088,13 @@ var o=[];var l=Array.isArray(e);for(f=n.s.c;f<=n.e.c;++f)s[f]=ya(f);for(var c=n.
                         <input type="number" id="interval-5" value="30" min="0" onchange="updateIntervals()">
                     </div>
                 </div>
-            </div></div>
+            </div></div></div>
         </section>
         
         <!-- 统计栏 -->
         <div class="stats-bar">
             <div class="stat-card">
-                <div class="num" id="stat-total">154</div>
+                <div class="num" id="stat-total">20</div>
                 <div class="label">总词汇</div>
             </div>
             <div class="stat-card">
@@ -1239,160 +1297,188 @@ var o=[];var l=Array.isArray(e);for(f=n.s.c;f<=n.e.c;++f)s[f]=ya(f);for(var c=n.
         
         // ============ 示例单词数据 ============
         const sampleWords = [
-  { unit: 'Unit 1', word: 'our', phonetic: '/aʊər/', meaning: "我们的", example: "Our classroom is clean.", translation: "我们的教室很干净。" },
-  { unit: 'Unit 1', word: 'read', phonetic: '/riːd/', meaning: "读，阅读", example: "I read English every day.", translation: "我每天读英语。" },
-  { unit: 'Unit 1', word: 'sing', phonetic: '/sɪŋ/', meaning: "唱歌", example: "We sing songs in class.", translation: "我们在课堂上唱歌。" },
-  { unit: 'Unit 1', word: 'their', phonetic: '/ðer/', meaning: "他们的", example: "Their books are new.", translation: "他们的书是新的。" },
-  { unit: 'Unit 1', word: 'her', phonetic: '/hɜːr/', meaning: "她的", example: "Her name is Lily.", translation: "她的名字是莉莉。" },
-  { unit: 'Unit 1', word: 'his', phonetic: '/hɪz/', meaning: "他的", example: "His pen is blue.", translation: "他的钢笔是蓝色的。" },
-  { unit: 'Unit 1', word: 'us', phonetic: '/ʌs/', meaning: "我们（宾格）", example: "Help us please.", translation: "请帮助我们。" },
-  { unit: 'Unit 1', word: 'them', phonetic: '/ðem/', meaning: "他们（宾格）", example: "I see them.", translation: "我看见他们。" },
-  { unit: 'Unit 1', word: 'teach', phonetic: '/tiːtʃ/', meaning: "教", example: "She teaches English.", translation: "她教英语。" },
-  { unit: 'Unit 1', word: 'learn', phonetic: '/lɜːrn/', meaning: "学习", example: "We learn new words.", translation: "我们学习新单词。" },
-  { unit: 'Unit 1', word: 'help', phonetic: '/help/', meaning: "帮助", example: "Can you help me?", translation: "你能帮我吗？" },
-  { unit: 'Unit 1', word: 'each other', phonetic: '/iːtʃ ˈʌðər/', meaning: "互相", example: "We help each other.", translation: "我们互相帮助。" },
-  { unit: 'Unit 1', word: 'together', phonetic: '/təˈɡeðər/', meaning: "一起", example: "Let\'s read together.", translation: "让我们一起读。" },
-  { unit: 'Unit 1', word: 'share', phonetic: '/ʃer/', meaning: "分享", example: "Share your toys.", translation: "分享你的玩具。" },
-  { unit: 'Unit 1', word: 'fun', phonetic: '/fʌn/', meaning: "乐趣", example: "We have fun.", translation: "我们玩得很开心。" },
-  { unit: 'Unit 2', word: 'play games', phonetic: '/pleɪ ɡeɪmz/', meaning: "做游戏", example: "Let\'s play games!", translation: "让我们做游戏吧！" },
-  { unit: 'Unit 2', word: 'take photos', phonetic: '/teɪk ˈfoʊtoʊz/', meaning: "拍照", example: "May I take photos?", translation: "我可以拍照吗？" },
-  { unit: 'Unit 2', word: 'go boating', phonetic: '/ɡoʊ ˈboʊtɪŋ/', meaning: "划船", example: "We go boating on the lake.", translation: "我们在湖上划船。" },
-  { unit: 'Unit 2', word: 'tell stories', phonetic: '/tel ˈstɔːriz/', meaning: "讲故事", example: "I like to tell stories.", translation: "我喜欢讲故事。" },
-  { unit: 'Unit 2', word: 'boat', phonetic: '/boʊt/', meaning: "小船", example: "The boat is on the river.", translation: "小船在河上。" },
-  { unit: 'Unit 2', word: 'sandcastle', phonetic: '/sændkæsl/', meaning: "沙堡", example: "We build a sandcastle.", translation: "我们建了一座沙堡。" },
-  { unit: 'Unit 2', word: 'great', phonetic: '/ɡreɪt/', meaning: "很好的，很棒的", example: "That\'s great!", translation: "太棒了！" },
-  { unit: 'Unit 2', word: 'sand', phonetic: '/sænd/', meaning: "沙子", example: "The sand is soft.", translation: "沙子很软。" },
-  { unit: 'Unit 2', word: 'join', phonetic: '/dʒɔɪn/', meaning: "参与，加入", example: "Join us please.", translation: "请加入我们。" },
-  { unit: 'Unit 2', word: 'meet', phonetic: '/miːt/', meaning: "与...见面", example: "Nice to meet you.", translation: "很高兴见到你。" },
-  { unit: 'Unit 2', word: 'we', phonetic: '/wiː/', meaning: "我们（主格）", example: "We are friends.", translation: "我们是朋友。" },
-  { unit: 'Unit 2', word: 'play with sand', phonetic: '/pleɪ wɪð sænd/', meaning: "玩沙子", example: "The children play with sand.", translation: "孩子们玩沙子。" },
-  { unit: 'Unit 2', word: 'play beach volleyball', phonetic: '/pleɪ biːtʃ ˈvɒlibɔːl/', meaning: "玩沙滩排球", example: "Let\'s play beach volleyball!", translation: "让我们打沙滩排球吧！" },
-  { unit: 'Unit 3', word: 'sweater', phonetic: '/ˈswetər/', meaning: "毛衣", example: "I wear a warm sweater.", translation: "我穿一件暖和的毛衣。" },
-  { unit: 'Unit 3', word: 'T-shirt', phonetic: '/ˈtiː ʃɜːrt/', meaning: "T恤衫", example: "This T-shirt is blue.", translation: "这件T恤是蓝色的。" },
-  { unit: 'Unit 3', word: 'skirt', phonetic: '/skɜːrt/', meaning: "短裙", example: "She wears a red skirt.", translation: "她穿一条红色的短裙。" },
-  { unit: 'Unit 3', word: 'dress', phonetic: '/dres/', meaning: "连衣裙", example: "She wears a beautiful dress.", translation: "她穿一条漂亮的连衣裙。" },
-  { unit: 'Unit 3', word: 'shirt', phonetic: '/ʃɜːrt/', meaning: "衬衫", example: "He wears a white shirt.", translation: "他穿一件白衬衫。" },
-  { unit: 'Unit 3', word: 'trousers', phonetic: '/ˈtraʊzərz/', meaning: "裤子", example: "These trousers are long.", translation: "这条裤子很长。" },
-  { unit: 'Unit 3', word: 'shorts', phonetic: '/ʃɔːrts/', meaning: "短裤", example: "I wear shorts in summer.", translation: "我夏天穿短裤。" },
-  { unit: 'Unit 3', word: 'coat', phonetic: '/koʊt/', meaning: "外套", example: "Put on your coat.", translation: "穿上你的外套。" },
-  { unit: 'Unit 3', word: 'hat', phonetic: '/hæt/', meaning: "帽子", example: "She wears a nice hat.", translation: "她戴一顶漂亮的帽子。" },
-  { unit: 'Unit 3', word: 'shoes', phonetic: '/ʃuːz/', meaning: "鞋子", example: "These shoes are clean.", translation: "这些鞋子很干净。" },
-  { unit: 'Unit 3', word: 'wear', phonetic: '/wer/', meaning: "穿；戴", example: "What do you wear?", translation: "你穿什么？" },
-  { unit: 'Unit 3', word: 'school', phonetic: '/skuːl/', meaning: "学校", example: "I go to school.", translation: "我去学校。" },
-  { unit: 'Unit 3', word: 'different', phonetic: '/ˈdɪfrənt/', meaning: "不同的", example: "We wear different clothes.", translation: "我们穿不同的衣服。" },
-  { unit: 'Unit 3', word: 'clothes', phonetic: '/kloʊðz/', meaning: "衣服", example: "These are her clothes.", translation: "这些是她的衣服。" },
-  { unit: 'Unit 3', word: 'uniform', phonetic: '/ˈjuːnɪfɔːrm/', meaning: "制服；校服", example: "We wear school uniforms.", translation: "我们穿校服。" },
-  { unit: 'Unit 3', word: 'whose', phonetic: '/huːz/', meaning: "谁的", example: "Whose coat is this?", translation: "这是谁的外套？" },
-  { unit: 'Unit 3', word: 'world', phonetic: '/wɜːrld/', meaning: "世界", example: "The world is big.", translation: "世界很大。" },
-  { unit: 'Unit 3', word: 'around the world', phonetic: '/əˈraʊnd ðə wɜːrld/', meaning: "在世界各地", example: "People wear different clothes around the world.", translation: "世界各地的人穿不同的衣服。" },
-  { unit: 'Unit 3', word: 'have a look', phonetic: '/hæv ə lʊk/', meaning: "看一看", example: "Have a look at this.", translation: "看一看这个。" },
-  { unit: 'Unit 3', word: 'pair', phonetic: '/per/', meaning: "一条；一双；一对", example: "I have a pair of shoes.", translation: "我有一双鞋。" },
-  { unit: 'Unit 4', word: 'grass', phonetic: '/ɡræs/', meaning: "草", example: "The grass is green.", translation: "草是绿色的。" },
-  { unit: 'Unit 4', word: 'river', phonetic: '/ˈrɪvər/', meaning: "河；江", example: "The river is long.", translation: "河很长。" },
-  { unit: 'Unit 4', word: 'hear', phonetic: '/hɪr/', meaning: "听见；听到", example: "I hear a sound.", translation: "我听见一个声音。" },
-  { unit: 'Unit 4', word: 'bird', phonetic: '/bɜːrd/', meaning: "鸟", example: "The bird sings.", translation: "小鸟在唱歌。" },
-  { unit: 'Unit 4', word: 'duck', phonetic: '/dʌk/', meaning: "鸭子", example: "The duck is on the lake.", translation: "鸭子在湖上。" },
-  { unit: 'Unit 4', word: 'bee', phonetic: '/biː/', meaning: "蜜蜂", example: "The bee flies.", translation: "蜜蜂在飞。" },
-  { unit: 'Unit 4', word: 'lake', phonetic: '/leɪk/', meaning: "湖", example: "We row a boat on the lake.", translation: "我们在湖上划船。" },
-  { unit: 'Unit 4', word: 'tweet', phonetic: '/twiːt/', meaning: "鸟叫声", example: "The bird says tweet tweet.", translation: "小鸟说啾啾。" },
-  { unit: 'Unit 4', word: 'buzz', phonetic: '/bʌz/', meaning: "蜜蜂声", example: "The bee goes buzz buzz.", translation: "蜜蜂嗡嗡嗡。" },
-  { unit: 'Unit 4', word: 'beside', phonetic: '/bɪˈsaɪd/', meaning: "在...旁边", example: "Sit beside me.", translation: "坐在我旁边。" },
-  { unit: 'Unit 4', word: 'whoosh', phonetic: '/wʊʃ/', meaning: "风声", example: "The wind goes whoosh whoosh.", translation: "风呼呼地吹。" },
-  { unit: 'Unit 4', word: 'blow', phonetic: '/bloʊ/', meaning: "刮；吹", example: "The wind blows.", translation: "风吹。" },
-  { unit: 'Unit 4', word: 'quack', phonetic: '/kwæk/', meaning: "鸭子叫声", example: "The duck says quack quack.", translation: "鸭子嘎嘎叫。" },
-  { unit: 'Unit 4', word: 'pass', phonetic: '/pæs/', meaning: "经过", example: "We pass the river.", translation: "我们经过河流。" },
-  { unit: 'Unit 4', word: 'walk', phonetic: '/wɔːk/', meaning: "走；行走", example: "We walk along the path.", translation: "我们沿着小路走。" },
-  { unit: 'Unit 4', word: 'along', phonetic: '/əˈlɔːŋ/', meaning: "沿着；顺着", example: "Walk along the river.", translation: "沿着河走。" },
-  { unit: 'Unit 4', word: 'path', phonetic: '/pæθ/', meaning: "小路", example: "The path is long.", translation: "小路很长。" },
-  { unit: 'Unit 4', word: 'pitter-patter', phonetic: '/ˈpɪtər ˈpætər/', meaning: "雨声", example: "The rain goes pitter-patter.", translation: "雨滴答滴答。" },
-  { unit: 'Unit 4', word: 'time', phonetic: '/taɪm/', meaning: "时间", example: "What time is it?", translation: "几点了？" },
-  { unit: 'Unit 4', word: 'again', phonetic: '/əˈɡen/', meaning: "再一次", example: "Let\'s sing again.", translation: "让我们再唱一次。" },
-  { unit: 'Unit 4', word: 'sound', phonetic: '/saʊnd/', meaning: "声音", example: "I hear a strange sound.", translation: "我听见一个奇怪的声音。" },
-  { unit: 'Unit 4', word: 'go outside', phonetic: '/ɡoʊ ˌaʊtˈsaɪd/', meaning: "去外面", example: "Let\'s go outside.", translation: "让我们去外面。" },
-  { unit: 'Unit 4', word: 'go home', phonetic: '/ɡoʊ hoʊm/', meaning: "回家", example: "It\'s time to go home.", translation: "该回家了。" },
-  { unit: 'Unit 5', word: 'where', phonetic: '/wer/', meaning: "哪里", example: "Where is my hat?", translation: "我的帽子在哪里？" },
-  { unit: 'Unit 5', word: 'colour', phonetic: '/ˈkʌlər/', meaning: "颜色", example: "What colour is it?", translation: "它是什么颜色？" },
-  { unit: 'Unit 5', word: 'pink', phonetic: '/pɪŋk/', meaning: "粉红色", example: "I like pink.", translation: "我喜欢粉红色。" },
-  { unit: 'Unit 5', word: 'blue', phonetic: '/bluː/', meaning: "蓝色", example: "The sky is blue.", translation: "天空是蓝色的。" },
-  { unit: 'Unit 5', word: 'red', phonetic: '/red/', meaning: "红色", example: "The apple is red.", translation: "苹果是红色的。" },
-  { unit: 'Unit 5', word: 'brown', phonetic: '/braʊn/', meaning: "棕色", example: "The bear is brown.", translation: "熊是棕色的。" },
-  { unit: 'Unit 5', word: 'black', phonetic: '/blæk/', meaning: "黑色", example: "The cat is black.", translation: "猫是黑色的。" },
-  { unit: 'Unit 5', word: 'white', phonetic: '/waɪt/', meaning: "白色", example: "The snow is white.", translation: "雪是白色的。" },
-  { unit: 'Unit 5', word: 'green', phonetic: '/ɡriːn/', meaning: "绿色", example: "The grass is green.", translation: "草是绿色的。" },
-  { unit: 'Unit 5', word: 'yellow', phonetic: '/ˈjeloʊ/', meaning: "黄色", example: "The banana is yellow.", translation: "香蕉是黄色的。" },
-  { unit: 'Unit 5', word: 'orange', phonetic: '/ˈɔːrɪndʒ/', meaning: "橙色", example: "The orange is orange.", translation: "橙子是橙色的。" },
-  { unit: 'Unit 5', word: 'purple', phonetic: '/ˈpɜːrpl/', meaning: "紫色", example: "The flower is purple.", translation: "花是紫色的。" },
-  { unit: 'Unit 5', word: 'gray', phonetic: '/ɡreɪ/', meaning: "灰色", example: "The cloud is gray.", translation: "云是灰色的。" },
-  { unit: 'Unit 5', word: 'colourful', phonetic: '/ˈkʌlərfəl/', meaning: "色彩丰富的", example: "The world is colourful.", translation: "世界是色彩丰富的。" },
-  { unit: 'Unit 5', word: 'rainbow', phonetic: '/ˈreɪnboʊ/', meaning: "彩虹", example: "I see a rainbow.", translation: "我看见彩虹。" },
-  { unit: 'Unit 5', word: 'sky', phonetic: '/skaɪ/', meaning: "天空", example: "The sky is blue.", translation: "天空是蓝色的。" },
-  { unit: 'Unit 5', word: 'flower', phonetic: '/ˈflaʊər/', meaning: "花", example: "The flower is pretty.", translation: "花是漂亮的。" },
-  { unit: 'Unit 5', word: 'leaf', phonetic: '/liːf/', meaning: "叶子", example: "The leaf is green.", translation: "叶子是绿色的。" },
-  { unit: 'Unit 5', word: 'tree', phonetic: '/triː/', meaning: "树", example: "The tree is tall.", translation: "树很高。" },
-  { unit: 'Unit 5', word: 'butterfly', phonetic: '/ˈbʌtərflaɪ/', meaning: "蝴蝶", example: "The butterfly is beautiful.", translation: "蝴蝶是美丽的。" },
-  { unit: 'Unit 5', word: 'paint', phonetic: '/peɪnt/', meaning: "涂色", example: "I paint the picture.", translation: "我给图画涂色。" },
-  { unit: 'Unit 5', word: 'draw', phonetic: '/drɔː/', meaning: "画", example: "I draw a rainbow.", translation: "我画彩虹。" },
-  { unit: 'Unit 5', word: 'see', phonetic: '/siː/', meaning: "看见", example: "I can see colours.", translation: "我能看见颜色。" },
-  { unit: 'Unit 5', word: 'beautiful', phonetic: '/ˈbjuːtɪfl/', meaning: "美丽的", example: "The world is beautiful.", translation: "世界是美丽的。" },
-  { unit: 'Unit 5', word: 'many', phonetic: '/ˈmeni/', meaning: "许多", example: "There are many colours.", translation: "有许多颜色。" },
-  { unit: 'Unit 6', word: 'kitchen', phonetic: '/ˈkɪtʃɪn/', meaning: "厨房", example: "Mother is in the kitchen.", translation: "妈妈在厨房。" },
-  { unit: 'Unit 6', word: 'bathroom', phonetic: '/ˈbæθruːm/', meaning: "浴室", example: "I wash my hands in the bathroom.", translation: "我在浴室洗手。" },
-  { unit: 'Unit 6', word: 'bedroom', phonetic: '/ˈbedruːm/', meaning: "卧室", example: "This is my bedroom.", translation: "这是我的卧室。" },
-  { unit: 'Unit 6', word: 'living room', phonetic: '/ˈlɪvɪŋ ruːm/', meaning: "客厅", example: "We watch TV in the living room.", translation: "我们在客厅看电视。" },
-  { unit: 'Unit 6', word: 'dining room', phonetic: '/ˈdaɪlɪŋ ruːm/', meaning: "餐厅", example: "We eat in the dining room.", translation: "我们在餐厅吃饭。" },
-  { unit: 'Unit 6', word: 'study', phonetic: '/ˈstʌdi/', meaning: "书房", example: "I read books in the study.", translation: "我在书房读书。" },
-  { unit: 'Unit 6', word: 'desk', phonetic: '/desk/', meaning: "书桌", example: "The desk is near the window.", translation: "书桌在窗户旁边。" },
-  { unit: 'Unit 6', word: 'chair', phonetic: '/tʃer/', meaning: "椅子", example: "Sit on the chair.", translation: "坐在椅子上。" },
-  { unit: 'Unit 6', word: 'sofa', phonetic: '/ˈsoʊfə/', meaning: "长沙发", example: "The sofa is soft.", translation: "长沙发很软。" },
-  { unit: 'Unit 6', word: 'room', phonetic: '/ruːm/', meaning: "房间", example: "I have my own room.", translation: "我有自己的房间。" },
-  { unit: 'Unit 6', word: 'from', phonetic: '/frʌm/', meaning: "从", example: "I am from China.", translation: "我来自中国。" },
-  { unit: 'Unit 6', word: 'new', phonetic: '/nuː/', meaning: "新的", example: "We have a new home.", translation: "我们有了一个新家。" },
-  { unit: 'Unit 6', word: 'dear', phonetic: '/dɪr/', meaning: "亲爱的", example: "Dear friends.", translation: "亲爱的朋友们。" },
-  { unit: 'Unit 6', word: 'show', phonetic: '/ʃoʊ/', meaning: "给...看", example: "Show me your room.", translation: "给我看看你的房间。" },
-  { unit: 'Unit 6', word: 'write', phonetic: '/raɪt/', meaning: "写字", example: "I write on the desk.", translation: "我在书桌上写字。" },
-  { unit: 'Unit 6', word: 'window', phonetic: '/ˈwɪndoʊ/', meaning: "窗户", example: "I look out of the window.", translation: "我向窗外看。" },
-  { unit: 'Unit 6', word: 'wish', phonetic: '/wɪʃ/', meaning: "祝愿", example: "Best wishes.", translation: "最好的祝愿。" },
-  { unit: 'Unit 6', word: 'before', phonetic: '/bɪˈfɔːr/', meaning: "在...之前", example: "Before bedtime.", translation: "在睡觉之前。" },
-  { unit: 'Unit 6', word: 'look out of', phonetic: '/lʊk aʊt əv/', meaning: "向...外看", example: "I look out of the window.", translation: "我向窗外看。" },
-  { unit: 'Unit 6', word: 'teddy bear', phonetic: '/ˈtedi ber/', meaning: "泰迪熊", example: "I have a teddy bear.", translation: "我有一只泰迪熊。" },
-  { unit: 'Unit 6', word: 'in front of', phonetic: '/ɪn frʌnt əv/', meaning: "在...前面", example: "There is a garden in front of my bedroom.", translation: "在我卧室前面有一个花园。" },
-  { unit: 'Unit 6', word: 'clock', phonetic: '/klɑːk/', meaning: "时钟", example: "There is a clock on the wall.", translation: "墙上有一个时钟。" },
-  { unit: 'Unit 6', word: 'picture', phonetic: '/ˈpɪktʃər/', meaning: "画", example: "There is a picture on the wall.", translation: "墙上有一幅画。" },
-  { unit: 'Unit 6', word: 'lamp', phonetic: '/læmp/', meaning: "灯", example: "The lamp is on the desk.", translation: "灯在书桌上。" },
-  { unit: 'Unit 6', word: 'bed', phonetic: '/bed/', meaning: "床", example: "The bed is soft.", translation: "床很软。" },
-  { unit: 'Unit 6', word: 'toy', phonetic: '/tɔɪ/', meaning: "玩具", example: "I have many toys.", translation: "我有很多玩具。" },
-  { unit: 'Unit 7', word: 'welcome', phonetic: '/ˈwelkəm/', meaning: "欢迎", example: "Welcome to our school!", translation: "欢迎来到我们的学校！" },
-  { unit: 'Unit 7', word: 'classroom', phonetic: '/ˈklæsruːm/', meaning: "教室", example: "We read in the classroom.", translation: "我们在教室里读书。" },
-  { unit: 'Unit 7', word: 'computer room', phonetic: '/kəmˈpjuːtər ruːm/', meaning: "电脑室", example: "There is a computer room.", translation: "有一个电脑室。" },
-  { unit: 'Unit 7', word: 'toilet', phonetic: '/ˈtɔɪlət/', meaning: "厕所", example: "Where is the toilet?", translation: "厕所在哪里？" },
-  { unit: 'Unit 7', word: 'playground', phonetic: '/ˈpleɪɡraʊnd/', meaning: "操场", example: "We play on the playground.", translation: "我们在操场上玩。" },
-  { unit: 'Unit 7', word: 'library', phonetic: '/ˈlaɪbreri/', meaning: "图书馆", example: "The library is big.", translation: "图书馆很大。" },
-  { unit: 'Unit 7', word: 'office', phonetic: '/ˈɔːfɪs/', meaning: "办公室", example: "The teacher\'s office.", translation: "教师办公室。" },
-  { unit: 'Unit 7', word: 'picture', phonetic: '/ˈpɪktʃər/', meaning: "图画", example: "I draw a picture.", translation: "我画一幅画。" },
-  { unit: 'Unit 7', word: 'tomorrow', phonetic: '/təˈmɔːroʊ/', meaning: "明天", example: "See you tomorrow.", translation: "明天见。" },
-  { unit: 'Unit 7', word: 'also', phonetic: '/ˈɔːlsoʊ/', meaning: "也", example: "I also go to school.", translation: "我也去学校。" },
-  { unit: 'Unit 7', word: 'bag', phonetic: '/bæɡ/', meaning: "书包", example: "I have a new bag.", translation: "我有一个新书包。" },
-  { unit: 'Unit 7', word: 'ruler', phonetic: '/ˈruːlər/', meaning: "直尺", example: "I need a ruler.", translation: "我需要一把直尺。" },
-  { unit: 'Unit 7', word: 'pencil', phonetic: '/ˈpensl/', meaning: "铅笔", example: "I write with a pencil.", translation: "我用铅笔写字。" },
-  { unit: 'Unit 7', word: 'pen', phonetic: '/pen/', meaning: "钢笔", example: "I write with a pen.", translation: "我用钢笔写字。" },
-  { unit: 'Unit 7', word: 'art room', phonetic: '/ɑːrt ruːm/', meaning: "美术教室", example: "We draw in the art room.", translation: "我们在美术教室画画。" },
-  { unit: 'Unit 7', word: 'swimming pool', phonetic: '/ˈswɪmɪŋ puːl/', meaning: "游泳池", example: "There is a swimming pool.", translation: "有一个游泳池。" },
-  { unit: 'Unit 7', word: 'a lot of', phonetic: '/ə lɑːt əv/', meaning: "大量的", example: "There are a lot of books.", translation: "有大量的书。" },
-  { unit: 'Unit 7', word: 'come and see', phonetic: '/kʌm ən siː/', meaning: "来看一看", example: "Come and see our school!", translation: "来看一看我们的学校！" },
-  { unit: 'Unit 8', word: 'Children\'s Day', phonetic: '/ˈtʃɪldrənz deɪ/', meaning: "儿童节", example: "Happy Children\'s Day!", translation: "儿童节快乐！" },
-  { unit: 'Unit 8', word: 'go to the beach', phonetic: '/ɡoʊ tu ðə biːtʃ/', meaning: "去海滩", example: "I go to the beach on Children\'s Day.", translation: "我在儿童节去海滩。" },
-  { unit: 'Unit 8', word: 'go to the cinema', phonetic: '/ɡoʊ tu ðə ˈsɪnəmə/', meaning: "去电影院", example: "I go to the cinema.", translation: "我去电影院。" },
-  { unit: 'Unit 8', word: 'go to the park', phonetic: '/ɡoʊ tu ðə pɑːrk/', meaning: "去公园", example: "I go to the park.", translation: "我去公园。" },
-  { unit: 'Unit 8', word: 'go to the zoo', phonetic: '/ɡoʊ tu ðə zuː/', meaning: "去动物园", example: "I go to the zoo.", translation: "我去动物园。" },
-  { unit: 'Unit 8', word: 'go to the museum', phonetic: '/ɡoʊ tu ðə mjuˈziːəm/', meaning: "去博物馆", example: "I go to the museum.", translation: "我去博物馆。" },
-  { unit: 'Unit 8', word: 'elephant', phonetic: '/ˈelɪfənt/', meaning: "象", example: "The elephant is big.", translation: "大象很大。" },
-  { unit: 'Unit 8', word: 'film', phonetic: '/fɪlm/', meaning: "电影", example: "I watch a film.", translation: "我看电影。" },
-  { unit: 'Unit 8', word: 'pizza', phonetic: '/ˈpiːtsə/', meaning: "比萨饼", example: "I like pizza.", translation: "我喜欢比萨饼。" },
-  { unit: 'Unit 8', word: 'shop', phonetic: '/ʃɑːp/', meaning: "商店", example: "I go to the shop.", translation: "我去商店。" },
-  { unit: 'Unit 8', word: 'eat', phonetic: '/iːt/', meaning: "吃", example: "I eat pizza.", translation: "我吃比萨饼。" },
-  { unit: 'Unit 8', word: 'classmate', phonetic: '/ˈklæsmeɪt/', meaning: "同班同学", example: "We are classmates.", translation: "我们是同班同学。" },
-  { unit: 'Unit 8', word: 'do a survey', phonetic: '/du ə ˈsɜːrveɪ/', meaning: "做调查", example: "Let\'s do a survey.", translation: "让我们做调查。" },
-  { unit: 'Unit 8', word: 'science museum', phonetic: '/ˈsaɪəns mjuˈziːəm/', meaning: "科技馆", example: "I go to the science museum.", translation: "我去科技馆。" },
+  { unit: "Unit 1", word: "our", phonetic: "/a\u028a\u0259(r)/", meaning: "\u6211\u4eec\u7684", example: "Our classroom is clean.", translation: "\u6211\u4eec\u7684\u6559\u5ba4\u5f88\u5e72\u51c0\u3002" },
+  { unit: "Unit 1", word: "read", phonetic: "/ri\u02d0d/", meaning: "\u9605\u8bfb", example: "I like to read books.", translation: "\u6211\u559c\u6b22\u8bfb\u4e66\u3002" },
+  { unit: "Unit 1", word: "sing", phonetic: "/s\u026a\u014b/", meaning: "\u5531\u6b4c", example: "She can sing very well.", translation: "\u5979\u5531\u6b4c\u5531\u5f97\u5f88\u597d\u3002" },
+  { unit: "Unit 1", word: "paint", phonetic: "/pe\u026ant/", meaning: "\u7528\u989c\u6599\u753b", example: "I like to paint pictures.", translation: "\u6211\u559c\u6b22\u753b\u753b\u3002" },
+  { unit: "Unit 1", word: "dance", phonetic: "/d\u0251\u02d0ns/", meaning: "\u8df3\u821e", example: "They dance in the park.", translation: "\u4ed6\u4eec\u5728\u516c\u56ed\u91cc\u8df3\u821e\u3002" },
+  { unit: "Unit 1", word: "swim", phonetic: "/sw\u026am/", meaning: "\u6e38\u6cf3", example: "We can swim in the pool.", translation: "\u6211\u4eec\u53ef\u4ee5\u5728\u6e38\u6cf3\u6c60\u91cc\u6e38\u6cf3\u3002" },
+  { unit: "Unit 1", word: "play basketball", phonetic: "/ple\u026a \u02c8b\u0251\u02d0sk\u026atb\u0254\u02d0l/", meaning: "\u6253\u7bee\u7403", example: "He likes to play basketball after school.", translation: "\u4ed6\u653e\u5b66\u540e\u559c\u6b22\u6253\u7bee\u7403\u3002" },
+  { unit: "Unit 1", word: "play ping-pong", phonetic: "/ple\u026a \u02c8p\u026a\u014b p\u0252\u014b/", meaning: "\u6253\u4e52\u4e53\u7403", example: "My father and I play ping-pong on weekends.", translation: "\u6211\u548c\u7238\u7238\u5468\u672b\u6253\u4e52\u4e53\u7403\u3002" },
+  { unit: "Unit 1", word: "play football", phonetic: "/ple\u026a \u02c8f\u028atb\u0254\u02d0l/", meaning: "\u8e22\u8db3\u7403", example: "The boys play football on the playground.", translation: "\u7537\u5b69\u4eec\u5728\u64cd\u573a\u4e0a\u8e22\u8db3\u7403\u3002" },
+  { unit: "Unit 1", word: "Ms", phonetic: "/m\u026az/", meaning: "\u5973\u58eb", example: "Ms Wang is our English teacher.", translation: "\u738b\u5973\u58eb\u662f\u6211\u4eec\u7684\u82f1\u8bed\u8001\u5e08\u3002" },
+  { unit: "Unit 1", word: "talk", phonetic: "/t\u0254\u02d0k/", meaning: "\u8ba8\u8bba\uff1b\u8c08\u8bba", example: "They talk about their hobbies.", translation: "\u4ed6\u4eec\u8c08\u8bba\u81ea\u5df1\u7684\u7231\u597d\u3002" },
+  { unit: "Unit 1", word: "hobby", phonetic: "/\u02c8h\u0252bi/", meaning: "\u4e1a\u4f59\u7231\u597d", example: "My hobby is reading.", translation: "\u6211\u7684\u7231\u597d\u662f\u8bfb\u4e66\u3002" },
+  { unit: "Unit 1", word: "do", phonetic: "/du\u02d0/", meaning: "\u505a\uff0c\u5e72\uff0c\u529e\uff08\u67d0\u4e8b\uff09", example: "What do you do on Sundays?", translation: "\u4f60\u661f\u671f\u5929\u505a\u4ec0\u4e48\uff1f" },
+  { unit: "Unit 1", word: "free", phonetic: "/fri\u02d0/", meaning: "\u7a7a\u95f2\u7684", example: "I am free this afternoon.", translation: "\u6211\u4eca\u5929\u4e0b\u5348\u6709\u7a7a\u3002" },
+  { unit: "Unit 1", word: "music", phonetic: "/\u02c8mju\u02d0z\u026ak/", meaning: "\u97f3\u4e50", example: "I like listening to music.", translation: "\u6211\u559c\u6b22\u542c\u97f3\u4e50\u3002" },
+  { unit: "Unit 1", word: "favourite", phonetic: "/\u02c8fe\u026av\u0259r\u026at/", meaning: "\u6700\u559c\u6b22\u7684", example: "My favourite colour is blue.", translation: "\u6211\u6700\u559c\u6b22\u7684\u989c\u8272\u662f\u84dd\u8272\u3002" },
+  { unit: "Unit 1", word: "sport", phonetic: "/sp\u0254\u02d0t/", meaning: "\u4f53\u80b2\u8fd0\u52a8", example: "Swimming is my favourite sport.", translation: "\u6e38\u6cf3\u662f\u6211\u6700\u559c\u6b22\u7684\u4f53\u80b2\u8fd0\u52a8\u3002" },
+  { unit: "Unit 2", word: "play a game", phonetic: "/ple\u026a \u0259 \u0261e\u026am/", meaning: "\u505a\u6e38\u620f", example: "Let's play a game together.", translation: "\u6211\u4eec\u4e00\u8d77\u505a\u6e38\u620f\u5427\u3002" },
+  { unit: "Unit 2", word: "take a photo", phonetic: "/te\u026ak \u0259 \u02c8f\u0259\u028at\u0259\u028a/", meaning: "\u62cd\u7167", example: "I want to take a photo of the beautiful view.", translation: "\u6211\u60f3\u7ed9\u8fd9\u7f8e\u4e3d\u7684\u666f\u8272\u62cd\u5f20\u7167\u3002" },
+  { unit: "Unit 2", word: "row a boat", phonetic: "/r\u0259\u028a \u0259 b\u0259\u028at/", meaning: "\u5212\u8239", example: "We can row a boat on the lake.", translation: "\u6211\u4eec\u53ef\u4ee5\u5728\u6e56\u4e0a\u5212\u8239\u3002" },
+  { unit: "Unit 2", word: "tell a story", phonetic: "/tel \u0259 \u02c8st\u0254\u02d0ri/", meaning: "\u8bb2\u6545\u4e8b", example: "My grandma often tells me a story before bed.", translation: "\u6211\u5976\u5976\u7ecf\u5e38\u5728\u7761\u524d\u7ed9\u6211\u8bb2\u6545\u4e8b\u3002" },
+  { unit: "Unit 2", word: "boat", phonetic: "/b\u0259\u028at/", meaning: "\u5c0f\u8239", example: "There is a small boat on the river.", translation: "\u6cb3\u4e0a\u6709\u4e00\u6761\u5c0f\u8239\u3002" },
+  { unit: "Unit 2", word: "sandcastle", phonetic: "/\u02c8s\u00e6ndk\u0251\u02d0sl/", meaning: "\u6c99\u5821", example: "The children are making a sandcastle on the beach.", translation: "\u5b69\u5b50\u4eec\u5728\u6c99\u6ee9\u4e0a\u5806\u6c99\u5821\u3002" },
+  { unit: "Unit 2", word: "great", phonetic: "/\u0261re\u026at/", meaning: "\u5f88\u597d\u7684\uff1b\u5f88\u68d2\u7684", example: "That's a great idea!", translation: "\u90a3\u662f\u4e2a\u597d\u4e3b\u610f\uff01" },
+  { unit: "Unit 2", word: "sand", phonetic: "/s\u00e6nd/", meaning: "\u6c99\u5b50", example: "The sand on the beach is very soft.", translation: "\u6c99\u6ee9\u4e0a\u7684\u6c99\u5b50\u5f88\u8f6f\u3002" },
+  { unit: "Unit 2", word: "join", phonetic: "/d\u0292\u0254\u026an/", meaning: "\u53c2\u4e0e\uff1b\u52a0\u5165\u5230\u2026\u2026\u4e4b\u4e2d", example: "Will you join us for the game?", translation: "\u4f60\u613f\u610f\u52a0\u5165\u6211\u4eec\u4e00\u8d77\u73a9\u6e38\u620f\u5417\uff1f" },
+  { unit: "Unit 2", word: "meet", phonetic: "/mi\u02d0t/", meaning: "\uff08\u4e0e\u2026\u2026\uff09\u89c1\u9762", example: "I will meet my friend at the school gate.", translation: "\u6211\u5c06\u5728\u6821\u95e8\u53e3\u548c\u6211\u7684\u670b\u53cb\u89c1\u9762\u3002" },
+  { unit: "Unit 2", word: "her", phonetic: "/h\u025c\u02d0(r)/", meaning: "\u5979\u7684", example: "This is her new dress.", translation: "\u8fd9\u662f\u5979\u7684\u65b0\u8fde\u8863\u88d9\u3002" },
+  { unit: "Unit 2", word: "us", phonetic: "/\u028cs/", meaning: "\u6211\u4eec", example: "The teacher will help us with our homework.", translation: "\u8001\u5e08\u4f1a\u5e2e\u6211\u4eec\u8f85\u5bfc\u4f5c\u4e1a\u3002" },
+  { unit: "Unit 2", word: "we", phonetic: "/wi\u02d0/", meaning: "\u6211\u4eec", example: "We are good friends.", translation: "\u6211\u4eec\u662f\u597d\u670b\u53cb\u3002" },
+  { unit: "Unit 2", word: "play in the sand", phonetic: "/ple\u026a \u026an \u00f0\u0259 s\u00e6nd/", meaning: "\u73a9\u6c99\u5b50", example: "The children like to play in the sand.", translation: "\u5b69\u5b50\u4eec\u559c\u6b22\u73a9\u6c99\u5b50\u3002" },
+  { unit: "Unit 2", word: "play beach volleyball", phonetic: "/ple\u026a bi\u02d0t\u0283 \u02c8v\u0252lib\u0254\u02d0l/", meaning: "\u73a9\u6c99\u6ee9\u6392\u7403", example: "We play beach volleyball on the beach.", translation: "\u6211\u4eec\u5728\u6c99\u6ee9\u4e0a\u73a9\u6c99\u6ee9\u6392\u7403\u3002" },
+  { unit: "Unit 3", word: "sweater", phonetic: "/\u02c8swet\u0259(r)/", meaning: "\u6bdb\u8863", example: "I wear a sweater in winter.", translation: "\u6211\u51ac\u5929\u7a7f\u6bdb\u8863\u3002" },
+  { unit: "Unit 3", word: "T-shirt", phonetic: "/\u02c8ti\u02d0 \u0283\u025c\u02d0t/", meaning: "T\u6064\u886b\uff1b\u77ed\u8896\u6c57\u886b", example: "This T-shirt is very comfortable.", translation: "\u8fd9\u4ef6T\u6064\u886b\u5f88\u8212\u670d\u3002" },
+  { unit: "Unit 3", word: "skirt", phonetic: "/sk\u025c\u02d0t/", meaning: "\u77ed\u88d9\uff1b\u534a\u8eab\u88d9", example: "She likes wearing a skirt in summer.", translation: "\u5979\u590f\u5929\u559c\u6b22\u7a7f\u77ed\u88d9\u3002" },
+  { unit: "Unit 3", word: "dress", phonetic: "/dres/", meaning: "\u8fde\u8863\u88d9", example: "That's a beautiful dress.", translation: "\u90a3\u662f\u4e00\u6761\u6f02\u4eae\u7684\u8fde\u8863\u88d9\u3002" },
+  { unit: "Unit 3", word: "shirt", phonetic: "/\u0283\u025c\u02d0t/", meaning: "\u886c\u886b", example: "My father wears a white shirt to work.", translation: "\u6211\u7238\u7238\u7a7f\u767d\u886c\u886b\u4e0a\u73ed\u3002" },
+  { unit: "Unit 3", word: "trousers", phonetic: "/\u02c8tra\u028az\u0259z/", meaning: "\u88e4\u5b50", example: "These trousers are too long for me.", translation: "\u8fd9\u6761\u88e4\u5b50\u5bf9\u6211\u6765\u8bf4\u592a\u957f\u4e86\u3002" },
+  { unit: "Unit 3", word: "shorts", phonetic: "/\u0283\u0254\u02d0ts/", meaning: "\u77ed\u88e4", example: "I wear shorts when it's hot.", translation: "\u5929\u70ed\u7684\u65f6\u5019\u6211\u7a7f\u77ed\u88e4\u3002" },
+  { unit: "Unit 3", word: "coat", phonetic: "/k\u0259\u028at/", meaning: "\u5916\u5957\uff1b\u5916\u8863\uff1b\u5927\u8863", example: "Put on your coat. It's cold outside.", translation: "\u7a7f\u4e0a\u4f60\u7684\u5916\u5957\uff0c\u5916\u9762\u5f88\u51b7\u3002" },
+  { unit: "Unit 3", word: "cap", phonetic: "/k\u00e6p/", meaning: "\u5e3d\u5b50", example: "This is my new baseball cap.", translation: "\u8fd9\u662f\u6211\u7684\u65b0\u68d2\u7403\u5e3d\u3002" },
+  { unit: "Unit 3", word: "shoes", phonetic: "/\u0283u\u02d0z/", meaning: "\u978b\u5b50", example: "My shoes are under the bed.", translation: "\u6211\u7684\u978b\u5b50\u5728\u5e8a\u5e95\u4e0b\u3002" },
+  { unit: "Unit 3", word: "student", phonetic: "/\u02c8stju\u02d0dnt/", meaning: "\u5b66\u751f", example: "I am a primary school student.", translation: "\u6211\u662f\u4e00\u540d\u5c0f\u5b66\u751f\u3002" },
+  { unit: "Unit 3", word: "wear", phonetic: "/we\u0259(r)/", meaning: "\u7a7f\uff1b\u6234\uff1b\u4f69\u6234", example: "She wears a red scarf today.", translation: "\u5979\u4eca\u5929\u6234\u4e86\u4e00\u6761\u7ea2\u56f4\u5dfe\u3002" },
+  { unit: "Unit 3", word: "school", phonetic: "/sku\u02d0l/", meaning: "\u5b66\u6821", example: "We go to school from Monday to Friday.", translation: "\u6211\u4eec\u5468\u4e00\u5230\u5468\u4e94\u4e0a\u5b66\u3002" },
+  { unit: "Unit 3", word: "different", phonetic: "/\u02c8d\u026afr\u0259nt/", meaning: "\u4e0d\u540c\u7684", example: "We have different hobbies.", translation: "\u6211\u4eec\u6709\u4e0d\u540c\u7684\u7231\u597d\u3002" },
+  { unit: "Unit 3", word: "clothes", phonetic: "/kl\u0259\u028a\u00f0z/", meaning: "\u8863\u670d\uff1b\u670d\u88c5", example: "I have many new clothes.", translation: "\u6211\u6709\u5f88\u591a\u65b0\u8863\u670d\u3002" },
+  { unit: "Unit 3", word: "uniform", phonetic: "/\u02c8ju\u02d0n\u026af\u0254\u02d0m/", meaning: "\u5236\u670d\uff1b\u6821\u670d", example: "We wear school uniforms on weekdays.", translation: "\u6211\u4eec\u5de5\u4f5c\u65e5\u7a7f\u6821\u670d\u3002" },
+  { unit: "Unit 3", word: "whose", phonetic: "/hu\u02d0z/", meaning: "\u8c01\u7684", example: "Whose book is this?", translation: "\u8fd9\u662f\u8c01\u7684\u4e66\uff1f" },
+  { unit: "Unit 3", word: "world", phonetic: "/w\u025c\u02d0ld/", meaning: "\u4e16\u754c", example: "I want to travel around the world.", translation: "\u6211\u60f3\u73af\u6e38\u4e16\u754c\u3002" },
+  { unit: "Unit 3", word: "around the world", phonetic: "/\u0259\u02c8ra\u028and \u00f0\u0259 w\u025c\u02d0ld/", meaning: "\u5728\u4e16\u754c\u5404\u5730", example: "He has friends around the world.", translation: "\u4ed6\u5728\u4e16\u754c\u5404\u5730\u90fd\u6709\u670b\u53cb\u3002" },
+  { unit: "Unit 3", word: "take a look", phonetic: "/te\u026ak \u0259 l\u028ak/", meaning: "\u770b\u4e00\u770b", example: "Come here and take a look at this picture.", translation: "\u8fc7\u6765\u770b\u770b\u8fd9\u5f20\u7167\u7247\u3002" },
+  { unit: "Unit 3", word: "a pair of", phonetic: "/\u0259 pe\u0259 \u0252v/", meaning: "\u4e00\u6761\uff1b\u4e00\u53cc\uff1b\u4e00\u5bf9", example: "I need a pair of new shoes.", translation: "\u6211\u9700\u8981\u4e00\u53cc\u65b0\u978b\u5b50\u3002" },
+  { unit: "Unit 4", word: "grass", phonetic: "/\u0261r\u0251\u02d0s/", meaning: "\u8349", example: "The grass is green in spring.", translation: "\u6625\u5929\u8349\u662f\u7eff\u7684\u3002" },
+  { unit: "Unit 4", word: "river", phonetic: "/\u02c8r\u026av\u0259(r)/", meaning: "\u6cb3\uff1b\u6c5f", example: "There is a river near my home.", translation: "\u6211\u5bb6\u9644\u8fd1\u6709\u4e00\u6761\u6cb3\u3002" },
+  { unit: "Unit 4", word: "hear", phonetic: "/h\u026a\u0259(r)/", meaning: "\u542c\u89c1\uff1b\u542c\u5230", example: "I can hear a bird singing.", translation: "\u6211\u80fd\u542c\u5230\u4e00\u53ea\u9e1f\u5728\u5531\u6b4c\u3002" },
+  { unit: "Unit 4", word: "bird", phonetic: "/b\u025c\u02d0d/", meaning: "\u9e1f", example: "The bird is flying in the sky.", translation: "\u9e1f\u5728\u5929\u7a7a\u4e2d\u98de\u3002" },
+  { unit: "Unit 4", word: "duck", phonetic: "/d\u028ck/", meaning: "\u9e2d\u5b50", example: "The duck is swimming in the river.", translation: "\u9e2d\u5b50\u5728\u6cb3\u91cc\u6e38\u6cf3\u3002" },
+  { unit: "Unit 4", word: "bee", phonetic: "/bi\u02d0/", meaning: "\u871c\u8702", example: "The bee is collecting honey from the flowers.", translation: "\u871c\u8702\u5728\u82b1\u4e1b\u4e2d\u91c7\u871c\u3002" },
+  { unit: "Unit 4", word: "lake", phonetic: "/le\u026ak/", meaning: "\u6e56\uff1b\u6e56\u6cca", example: "We go boating on the lake every weekend.", translation: "\u6211\u4eec\u6bcf\u4e2a\u5468\u672b\u90fd\u53bb\u6e56\u4e0a\u5212\u8239\u3002" },
+  { unit: "Unit 4", word: "chirp", phonetic: "/t\u0283\u025c\u02d0p/", meaning: "\uff08\u9e1f\u53eb\u58f0\uff09", example: "I can hear the chirp of the birds in the tree.", translation: "\u6211\u80fd\u542c\u5230\u6811\u4e0a\u9e1f\u513f\u7684\u53eb\u58f0\u3002" },
+  { unit: "Unit 4", word: "buzz", phonetic: "/b\u028cz/", meaning: "\uff08\u871c\u8702\u58f0\uff09", example: "The buzz of the bees is very loud.", translation: "\u871c\u8702\u7684\u55e1\u55e1\u58f0\u5f88\u5927\u3002" },
+  { unit: "Unit 4", word: "by", phonetic: "/ba\u026a/", meaning: "\u5728\u2026\u2026\u65c1\u8fb9", example: "The park is by the river.", translation: "\u516c\u56ed\u5728\u6cb3\u8fb9\u3002" },
+  { unit: "Unit 4", word: "swish", phonetic: "/sw\u026a\u0283/", meaning: "\uff08\u98ce\u58f0\uff09", example: "I can hear the swish of the wind outside.", translation: "\u6211\u80fd\u542c\u5230\u5916\u9762\u7684\u98ce\u58f0\u3002" },
+  { unit: "Unit 4", word: "blow", phonetic: "/bl\u0259\u028a/", meaning: "\u522e\uff1b\u5439", example: "The wind is blowing hard today.", translation: "\u4eca\u5929\u98ce\u522e\u5f97\u5f88\u5927\u3002" },
+  { unit: "Unit 4", word: "quack", phonetic: "/kw\u00e6k/", meaning: "\uff08\u9e2d\u5b50\u53eb\u58f0\uff09", example: "The duck gave a loud quack.", translation: "\u9e2d\u5b50\u5927\u58f0\u5730\u53eb\u4e86\u4e00\u58f0\u3002" },
+  { unit: "Unit 4", word: "past", phonetic: "/p\u0251\u02d0st/", meaning: "\u7ecf\u8fc7", example: "A car went past us just now.", translation: "\u521a\u624d\u4e00\u8f86\u8f66\u4ece\u6211\u4eec\u8eab\u8fb9\u7ecf\u8fc7\u3002" },
+  { unit: "Unit 4", word: "walk", phonetic: "/w\u0254\u02d0k/", meaning: "\u8d70\uff1b\u884c\u8d70", example: "I walk to school every day.", translation: "\u6211\u6bcf\u5929\u6b65\u884c\u4e0a\u5b66\u3002" },
+  { unit: "Unit 4", word: "along", phonetic: "/\u0259\u02c8l\u0252\u014b/", meaning: "\u6cbf\u7740\uff1b\u987a\u7740", example: "We walk along the river every evening.", translation: "\u6211\u4eec\u6bcf\u5929\u665a\u4e0a\u6cbf\u7740\u6cb3\u8fb9\u6563\u6b65\u3002" },
+  { unit: "Unit 4", word: "path", phonetic: "/p\u0251\u02d0\u03b8/", meaning: "\u5c0f\u8def\uff1b\u5c0f\u5f84", example: "There is a small path through the forest.", translation: "\u6709\u4e00\u6761\u5c0f\u8def\u7a7f\u8fc7\u68ee\u6797\u3002" },
+  { unit: "Unit 4", word: "pitter-patter", phonetic: "/\u02c8p\u026at\u0259 \u02c8p\u00e6t\u0259/", meaning: "\uff08\u96e8\u58f0\uff09", example: "I can hear the pitter-patter of the rain on the roof.", translation: "\u6211\u80fd\u542c\u5230\u96e8\u6253\u5728\u5c4b\u9876\u4e0a\u7684\u556a\u55d2\u58f0\u3002" },
+  { unit: "Unit 4", word: "time", phonetic: "/ta\u026am/", meaning: "\u65f6\u95f4", example: "What time is it now?", translation: "\u73b0\u5728\u51e0\u70b9\u4e86\uff1f" },
+  { unit: "Unit 4", word: "again", phonetic: "/\u0259\u02c8\u0261en/", meaning: "\u518d\u4e00\u6b21\uff1b\u53c8\u4e00\u6b21", example: "Please say that again.", translation: "\u8bf7\u518d\u8bf4\u4e00\u904d\u3002" },
+  { unit: "Unit 4", word: "sound", phonetic: "/sa\u028and/", meaning: "\u58f0\u97f3", example: "I heard a strange sound last night.", translation: "\u6628\u665a\u6211\u542c\u5230\u4e86\u4e00\u4e2a\u5947\u602a\u7684\u58f0\u97f3\u3002" },
+  { unit: "Unit 4", word: "go outside", phonetic: "/\u0261\u0259\u028a \u02cca\u028at\u02c8sa\u026ad/", meaning: "\u53bb\u5916\u9762", example: "Let's go outside and play.", translation: "\u6211\u4eec\u53bb\u5916\u9762\u73a9\u5427\u3002" },
+  { unit: "Unit 4", word: "go home", phonetic: "/\u0261\u0259\u028a h\u0259\u028am/", meaning: "\u56de\u5bb6", example: "I go home at 5 o'clock every afternoon.", translation: "\u6211\u6bcf\u5929\u4e0b\u53485\u70b9\u56de\u5bb6\u3002" },
+  { unit: "Unit 5", word: "where", phonetic: "/we\u0259(r)/", meaning: "\u54ea\u91cc", example: "Where is my schoolbag?", translation: "\u6211\u7684\u4e66\u5305\u5728\u54ea\u91cc\uff1f" },
+  { unit: "Unit 5", word: "colour", phonetic: "/\u02c8k\u028cl\u0259(r)/", meaning: "\u989c\u8272", example: "What colour is your pen?", translation: "\u4f60\u7684\u94a2\u7b14\u662f\u4ec0\u4e48\u989c\u8272\u7684\uff1f" },
+  { unit: "Unit 5", word: "pink", phonetic: "/p\u026a\u014bk/", meaning: "\u7c89\u7ea2\u8272\uff1b\u7c89\u7ea2\u8272\u7684", example: "She has a pink dress.", translation: "\u5979\u6709\u4e00\u6761\u7c89\u7ea2\u8272\u7684\u8fde\u8863\u88d9\u3002" },
+  { unit: "Unit 5", word: "blue", phonetic: "/blu\u02d0/", meaning: "\u84dd\u8272\uff1b\u84dd\u8272\u7684", example: "The sky is blue.", translation: "\u5929\u7a7a\u662f\u84dd\u8272\u7684\u3002" },
+  { unit: "Unit 5", word: "red", phonetic: "/red/", meaning: "\u7ea2\u8272\uff1b\u7ea2\u8272\u7684", example: "My favourite colour is red.", translation: "\u6211\u6700\u559c\u6b22\u7684\u989c\u8272\u662f\u7ea2\u8272\u3002" },
+  { unit: "Unit 5", word: "brown", phonetic: "/bra\u028an/", meaning: "\u68d5\u8272\uff1b\u68d5\u8272\u7684", example: "The bear is brown.", translation: "\u718a\u662f\u68d5\u8272\u7684\u3002" },
+  { unit: "Unit 5", word: "black", phonetic: "/bl\u00e6k/", meaning: "\u9ed1\u8272\uff1b\u9ed1\u8272\u7684", example: "My hair is black.", translation: "\u6211\u7684\u5934\u53d1\u662f\u9ed1\u8272\u7684\u3002" },
+  { unit: "Unit 5", word: "white", phonetic: "/wa\u026at/", meaning: "\u767d\u8272\uff1b\u767d\u8272\u7684", example: "The snow is white.", translation: "\u96ea\u662f\u767d\u8272\u7684\u3002" },
+  { unit: "Unit 5", word: "purple", phonetic: "/\u02c8p\u025c\u02d0pl/", meaning: "\u7d2b\u8272\uff1b\u7d2b\u8272\u7684", example: "I like purple flowers.", translation: "\u6211\u559c\u6b22\u7d2b\u8272\u7684\u82b1\u3002" },
+  { unit: "Unit 5", word: "green", phonetic: "/\u0261ri\u02d0n/", meaning: "\u7eff\u8272\uff1b\u7eff\u8272\u7684", example: "The leaves are green in summer.", translation: "\u590f\u5929\u6811\u53f6\u662f\u7eff\u8272\u7684\u3002" },
+  { unit: "Unit 5", word: "orange", phonetic: "/\u02c8\u0252r\u026and\u0292/", meaning: "\u6a58\u9ec4\u8272\uff1b\u6a58\u9ec4\u8272\u7684", example: "The orange is orange.", translation: "\u6a59\u5b50\u662f\u6a58\u9ec4\u8272\u7684\u3002" },
+  { unit: "Unit 5", word: "yellow", phonetic: "/\u02c8jel\u0259\u028a/", meaning: "\u9ec4\u8272\uff1b\u9ec4\u8272\u7684", example: "The sun is yellow.", translation: "\u592a\u9633\u662f\u9ec4\u8272\u7684\u3002" },
+  { unit: "Unit 5", word: "snow", phonetic: "/sn\u0259\u028a/", meaning: "\u96ea", example: "It often snows in winter here.", translation: "\u8fd9\u91cc\u51ac\u5929\u7ecf\u5e38\u4e0b\u96ea\u3002" },
+  { unit: "Unit 5", word: "tree", phonetic: "/tri\u02d0/", meaning: "\u6811\uff1b\u6811\u6728", example: "There is a big tree in front of my house.", translation: "\u6211\u5bb6\u95e8\u524d\u6709\u4e00\u68f5\u5927\u6811\u3002" },
+  { unit: "Unit 5", word: "out", phonetic: "/a\u028at/", meaning: "\u5728\u5ba4\u5916", example: "The children are playing out.", translation: "\u5b69\u5b50\u4eec\u5728\u5916\u9762\u73a9\u3002" },
+  { unit: "Unit 5", word: "garden", phonetic: "/\u02c8\u0261\u0251\u02d0dn/", meaning: "\u82b1\u56ed", example: "My grandma has a beautiful garden.", translation: "\u6211\u5976\u5976\u6709\u4e00\u4e2a\u6f02\u4eae\u7684\u82b1\u56ed\u3002" },
+  { unit: "Unit 5", word: "up", phonetic: "/\u028cp/", meaning: "\u5411\u4e0a\uff1b\u5728\u4e0a\u9762", example: "The bird is flying up in the sky.", translation: "\u9e1f\u5728\u5929\u7a7a\u4e2d\u5411\u4e0a\u98de\u3002" },
+  { unit: "Unit 5", word: "there (is, are)", phonetic: "/\u00f0e\u0259(r) \u026az \u0251\u02d0(r)/", meaning: "\uff08\u8868\u793a\u5b58\u5728\u6216\u53d1\u751f\uff09", example: "There is a book on the desk.", translation: "\u684c\u5b50\u4e0a\u6709\u4e00\u672c\u4e66\u3002" },
+  { unit: "Unit 5", word: "butterfly", phonetic: "/\u02c8b\u028ct\u0259fla\u026a/", meaning: "\u8774\u8776", example: "The butterfly is very beautiful.", translation: "\u8fd9\u53ea\u8774\u8776\u5f88\u6f02\u4eae\u3002" },
+  { unit: "Unit 5", word: "lizard", phonetic: "/\u02c8l\u026az\u0259d/", meaning: "\u8725\u8734", example: "I saw a lizard on the wall.", translation: "\u6211\u5728\u5899\u4e0a\u770b\u5230\u4e86\u4e00\u53ea\u8725\u8734\u3002" },
+  { unit: "Unit 5", word: "now", phonetic: "/na\u028a/", meaning: "\u73b0\u5728", example: "I am doing my homework now.", translation: "\u6211\u73b0\u5728\u6b63\u5728\u505a\u4f5c\u4e1a\u3002" },
+  { unit: "Unit 5", word: "problem", phonetic: "/\u02c8pr\u0252bl\u0259m/", meaning: "\u96be\u9898\uff1b\u56f0\u96be", example: "Can you help me with this maths problem?", translation: "\u4f60\u80fd\u5e2e\u6211\u89e3\u51b3\u8fd9\u9053\u6570\u5b66\u96be\u9898\u5417\uff1f" },
+  { unit: "Unit 5", word: "sky", phonetic: "/ska\u026a/", meaning: "\u5929\uff1b\u5929\u7a7a", example: "The sky is very clear today.", translation: "\u4eca\u5929\u7684\u5929\u7a7a\u5f88\u6674\u6717\u3002" },
+  { unit: "Unit 5", word: "dark", phonetic: "/d\u0251\u02d0k/", meaning: "\u9ed1\u6697\u7684\uff1b\u660f\u6697\u7684", example: "It's getting dark outside.", translation: "\u5916\u9762\u5929\u6e10\u6e10\u9ed1\u4e86\u3002" },
+  { unit: "Unit 5", word: "night", phonetic: "/na\u026at/", meaning: "\u591c\u665a", example: "We can see many stars at night.", translation: "\u665a\u4e0a\u6211\u4eec\u80fd\u770b\u5230\u5f88\u591a\u661f\u661f\u3002" },
+  { unit: "Unit 5", word: "colourful", phonetic: "/\u02c8k\u028cl\u0259fl/", meaning: "\u4e94\u5f69\u7f24\u7eb7\u7684", example: "There are many colourful flowers in the park.", translation: "\u516c\u56ed\u91cc\u6709\u5f88\u591a\u4e94\u5f69\u7f24\u7eb7\u7684\u82b1\u3002" },
+  { unit: "Unit 5", word: "firework", phonetic: "/\u02c8fa\u026a\u0259w\u025c\u02d0k/", meaning: "\u70df\u82b1", example: "We watched the fireworks on New Year's Eve.", translation: "\u6211\u4eec\u5728\u9664\u5915\u591c\u770b\u4e86\u70df\u82b1\u3002" },
+  { unit: "Unit 6", word: "kitchen", phonetic: "/\u02c8k\u026at\u0283\u026an/", meaning: "\u53a8\u623f", example: "My mother is cooking in the kitchen.", translation: "\u6211\u5988\u5988\u6b63\u5728\u53a8\u623f\u505a\u996d\u3002" },
+  { unit: "Unit 6", word: "bathroom", phonetic: "/\u02c8b\u0251\u02d0\u03b8ru\u02d0m/", meaning: "\u6d74\u5ba4\uff1b\u76e5\u6d17\u5ba4", example: "I wash my hands in the bathroom.", translation: "\u6211\u5728\u6d74\u5ba4\u6d17\u624b\u3002" },
+  { unit: "Unit 6", word: "bedroom", phonetic: "/\u02c8bedru\u02d0m/", meaning: "\u5367\u5ba4", example: "My bedroom is very clean and tidy.", translation: "\u6211\u7684\u5367\u5ba4\u975e\u5e38\u5e72\u51c0\u6574\u6d01\u3002" },
+  { unit: "Unit 6", word: "dining room", phonetic: "/\u02c8da\u026an\u026a\u014b ru\u02d0m/", meaning: "\u9910\u5385", example: "We have dinner in the dining room.", translation: "\u6211\u4eec\u5728\u9910\u5385\u5403\u665a\u996d\u3002" },
+  { unit: "Unit 6", word: "living room", phonetic: "/\u02c8l\u026av\u026a\u014b ru\u02d0m/", meaning: "\u5ba2\u5385\uff1b\u8d77\u5c45\u5ba4", example: "We watch TV in the living room.", translation: "\u6211\u4eec\u5728\u5ba2\u5385\u770b\u7535\u89c6\u3002" },
+  { unit: "Unit 6", word: "study", phonetic: "/\u02c8st\u028cdi/", meaning: "\u4e66\u623f", example: "My father often reads books in the study.", translation: "\u6211\u7238\u7238\u7ecf\u5e38\u5728\u4e66\u623f\u770b\u4e66\u3002" },
+  { unit: "Unit 6", word: "desk", phonetic: "/desk/", meaning: "\u4e66\u684c", example: "There is a computer on the desk.", translation: "\u4e66\u684c\u4e0a\u6709\u4e00\u53f0\u7535\u8111\u3002" },
+  { unit: "Unit 6", word: "chair", phonetic: "/t\u0283e\u0259(r)/", meaning: "\u6905\u5b50", example: "I sit on the chair to do my homework.", translation: "\u6211\u5750\u5728\u6905\u5b50\u4e0a\u505a\u4f5c\u4e1a\u3002" },
+  { unit: "Unit 6", word: "sofa", phonetic: "/\u02c8s\u0259\u028af\u0259/", meaning: "\u957f\u6c99\u53d1", example: "The sofa is very comfortable to sit on.", translation: "\u8fd9\u4e2a\u6c99\u53d1\u5750\u8d77\u6765\u5f88\u8212\u670d\u3002" },
+  { unit: "Unit 6", word: "room", phonetic: "/ru\u02d0m/", meaning: "\u623f\u95f4", example: "This is my sister's room.", translation: "\u8fd9\u662f\u6211\u59b9\u59b9\u7684\u623f\u95f4\u3002" },
+  { unit: "Unit 6", word: "from", phonetic: "/fr\u0252m/", meaning: "\u4ece\uff1b\u6765\u81ea", example: "I am from China.", translation: "\u6211\u6765\u81ea\u4e2d\u56fd\u3002" },
+  { unit: "Unit 6", word: "new", phonetic: "/nju\u02d0/", meaning: "\u65b0\u7684", example: "I have a new schoolbag.", translation: "\u6211\u6709\u4e00\u4e2a\u65b0\u4e66\u5305\u3002" },
+  { unit: "Unit 6", word: "dear", phonetic: "/d\u026a\u0259(r)/", meaning: "\u4eb2\u7231\u7684", example: "Dear mum, I love you.", translation: "\u4eb2\u7231\u7684\u5988\u5988\uff0c\u6211\u7231\u4f60\u3002" },
+  { unit: "Unit 6", word: "show", phonetic: "/\u0283\u0259\u028a/", meaning: "\u7ed9\u2026\u2026\u770b\uff1b\u5c55\u793a", example: "Can you show me your new toy?", translation: "\u4f60\u80fd\u7ed9\u6211\u770b\u770b\u4f60\u7684\u65b0\u73a9\u5177\u5417\uff1f" },
+  { unit: "Unit 6", word: "write", phonetic: "/ra\u026at/", meaning: "\u5199\u5b57\uff1b\u5199\u4f5c", example: "I learn to write English words every day.", translation: "\u6211\u6bcf\u5929\u5b66\u4e60\u5199\u82f1\u8bed\u5355\u8bcd\u3002" },
+  { unit: "Unit 6", word: "window", phonetic: "/\u02c8w\u026and\u0259\u028a/", meaning: "\u7a97\uff1b\u7a97\u6237", example: "Open the window, please. It's too hot.", translation: "\u8bf7\u6253\u5f00\u7a97\u6237\uff0c\u592a\u70ed\u4e86\u3002" },
+  { unit: "Unit 6", word: "wish", phonetic: "/w\u026a\u0283/", meaning: "\u795d\u613f", example: "I wish you a happy birthday.", translation: "\u6211\u795d\u4f60\u751f\u65e5\u5feb\u4e50\u3002" },
+  { unit: "Unit 6", word: "in front of", phonetic: "/\u026an fr\u028cnt \u0252v/", meaning: "\u5728\u2026\u2026\u524d\u9762", example: "There is a tree in front of the house.", translation: "\u623f\u5b50\u524d\u9762\u6709\u4e00\u68f5\u6811\u3002" },
+  { unit: "Unit 6", word: "look out of", phonetic: "/l\u028ak a\u028at \u0252v/", meaning: "\u5411\u2026\u2026\u5916\u770b", example: "Look out of the window. It's raining.", translation: "\u5411\u7a97\u5916\u770b\uff0c\u4e0b\u96e8\u4e86\u3002" },
+  { unit: "Unit 6", word: "teddy bear", phonetic: "/\u02c8tedi be\u0259(r)/", meaning: "\u6cf0\u8fea\u718a", example: "My little sister has a cute teddy bear.", translation: "\u6211\u59b9\u59b9\u6709\u4e00\u53ea\u53ef\u7231\u7684\u6cf0\u8fea\u718a\u3002" },
+  { unit: "Unit 7", word: "welcome", phonetic: "/\u02c8welk\u0259m/", meaning: "\u6b22\u8fce", example: "Welcome to our school!", translation: "\u6b22\u8fce\u6765\u5230\u6211\u4eec\u5b66\u6821\uff01" },
+  { unit: "Unit 7", word: "classroom", phonetic: "/\u02c8kl\u0251\u02d0sru\u02d0m/", meaning: "\u6559\u5ba4", example: "Our classroom is on the second floor.", translation: "\u6211\u4eec\u7684\u6559\u5ba4\u5728\u4e8c\u697c\u3002" },
+  { unit: "Unit 7", word: "computer room", phonetic: "/k\u0259m\u02c8pju\u02d0t\u0259 ru\u02d0m/", meaning: "\u7535\u8111\u5ba4", example: "We have computer lessons in the computer room.", translation: "\u6211\u4eec\u5728\u7535\u8111\u5ba4\u4e0a\u7535\u8111\u8bfe\u3002" },
+  { unit: "Unit 7", word: "toilet", phonetic: "/\u02c8t\u0254\u026al\u0259t/", meaning: "\u5395\u6240\uff1b\u536b\u751f\u95f4\uff1b\u76e5\u6d17\u5ba4", example: "Where is the toilet, please?", translation: "\u8bf7\u95ee\u5395\u6240\u5728\u54ea\u91cc\uff1f" },
+  { unit: "Unit 7", word: "sports ground", phonetic: "/sp\u0254\u02d0ts \u0261ra\u028and/", meaning: "\u64cd\u573a", example: "We have PE lessons on the sports ground.", translation: "\u6211\u4eec\u5728\u64cd\u573a\u4e0a\u4f53\u80b2\u8bfe\u3002" },
+  { unit: "Unit 7", word: "library", phonetic: "/\u02c8la\u026abr\u0259ri/", meaning: "\u56fe\u4e66\u9986", example: "I often borrow books from the library.", translation: "\u6211\u7ecf\u5e38\u4ece\u56fe\u4e66\u9986\u501f\u4e66\u3002" },
+  { unit: "Unit 7", word: "office", phonetic: "/\u02c8\u0252f\u026as/", meaning: "\u529e\u516c\u5ba4", example: "The teachers' office is next to our classroom.", translation: "\u8001\u5e08\u7684\u529e\u516c\u5ba4\u5728\u6211\u4eec\u6559\u5ba4\u65c1\u8fb9\u3002" },
+  { unit: "Unit 7", word: "picture", phonetic: "/\u02c8p\u026akt\u0283\u0259(r)/", meaning: "\u56fe\u753b", example: "There is a beautiful picture on the wall.", translation: "\u5899\u4e0a\u6709\u4e00\u5e45\u6f02\u4eae\u7684\u56fe\u753b\u3002" },
+  { unit: "Unit 7", word: "tomorrow", phonetic: "/t\u0259\u02c8m\u0252r\u0259\u028a/", meaning: "\u660e\u5929", example: "We will have a sports meeting tomorrow.", translation: "\u6211\u4eec\u660e\u5929\u8981\u5f00\u8fd0\u52a8\u4f1a\u3002" },
+  { unit: "Unit 7", word: "also", phonetic: "/\u02c8\u0254\u02d0ls\u0259\u028a/", meaning: "\u4e5f", example: "I like English, and I also like Maths.", translation: "\u6211\u559c\u6b22\u82f1\u8bed\uff0c\u6211\u4e5f\u559c\u6b22\u6570\u5b66\u3002" },
+  { unit: "Unit 7", word: "schoolbag", phonetic: "/\u02c8sku\u02d0lb\u00e6\u0261/", meaning: "\u4e66\u5305", example: "My schoolbag is very heavy.", translation: "\u6211\u7684\u4e66\u5305\u5f88\u91cd\u3002" },
+  { unit: "Unit 7", word: "ruler", phonetic: "/\u02c8ru\u02d0l\u0259(r)/", meaning: "\u76f4\u5c3a", example: "I use a ruler to draw a straight line.", translation: "\u6211\u7528\u76f4\u5c3a\u753b\u76f4\u7ebf\u3002" },
+  { unit: "Unit 7", word: "pencil", phonetic: "/\u02c8pensl/", meaning: "\u94c5\u7b14", example: "I write with a pencil.", translation: "\u6211\u7528\u94c5\u7b14\u5199\u5b57\u3002" },
+  { unit: "Unit 7", word: "pen", phonetic: "/pen/", meaning: "\u94a2\u7b14", example: "My father gives me a new pen.", translation: "\u6211\u7238\u7238\u7ed9\u4e86\u6211\u4e00\u652f\u65b0\u94a2\u7b14\u3002" },
+  { unit: "Unit 7", word: "art room", phonetic: "/\u0251\u02d0t ru\u02d0m/", meaning: "\u7f8e\u672f\u6559\u5ba4", example: "We have art lessons in the art room.", translation: "\u6211\u4eec\u5728\u7f8e\u672f\u6559\u5ba4\u4e0a\u7f8e\u672f\u8bfe\u3002" },
+  { unit: "Unit 7", word: "swimming pool", phonetic: "/\u02c8sw\u026am\u026a\u014b pu\u02d0l/", meaning: "\u6e38\u6cf3\u6c60", example: "We go swimming in the swimming pool every summer.", translation: "\u6211\u4eec\u6bcf\u4e2a\u590f\u5929\u90fd\u53bb\u6e38\u6cf3\u6c60\u6e38\u6cf3\u3002" },
+  { unit: "Unit 7", word: "lots of", phonetic: "/l\u0252ts \u0252v/", meaning: "\u5927\u91cf\u7684\uff1b\u5f88\u591a\u7684", example: "There are lots of books in the library.", translation: "\u56fe\u4e66\u9986\u91cc\u6709\u5f88\u591a\u4e66\u3002" },
+  { unit: "Unit 7", word: "Come and see!", phonetic: "/k\u028cm \u00e6nd si\u02d0/", meaning: "\u6765\u770b\u4e00\u770b\uff01", example: "Come and see! My new room is very beautiful.", translation: "\u6765\u770b\u4e00\u770b\uff01\u6211\u7684\u65b0\u623f\u95f4\u5f88\u6f02\u4eae\u3002" },
+  { unit: "Unit 8", word: "Children's Day", phonetic: "/\u02c8t\u0283\u026aldr\u0259nz de\u026a/", meaning: "\u513f\u7ae5\u8282", example: "We are very happy on Children's Day.", translation: "\u513f\u7ae5\u8282\u6211\u4eec\u5f88\u5f00\u5fc3\u3002" },
+  { unit: "Unit 8", word: "go to the beach", phonetic: "/\u0261\u0259\u028a tu \u00f0\u0259 bi\u02d0t\u0283/", meaning: "\u53bb\u6d77\u6ee9", example: "We will go to the beach this summer holiday.", translation: "\u8fd9\u4e2a\u6691\u5047\u6211\u4eec\u8981\u53bb\u6d77\u6ee9\u3002" },
+  { unit: "Unit 8", word: "go to the cinema", phonetic: "/\u0261\u0259\u028a tu \u00f0\u0259 \u02c8s\u026an\u0259m\u0259/", meaning: "\uff08\u53bb\u7535\u5f71\u9662\uff09\u770b\u7535\u5f71", example: "I want to go to the cinema with my friends.", translation: "\u6211\u60f3\u548c\u6211\u7684\u670b\u53cb\u53bb\u770b\u7535\u5f71\u3002" },
+  { unit: "Unit 8", word: "go to the park", phonetic: "/\u0261\u0259\u028a tu \u00f0\u0259 p\u0251\u02d0k/", meaning: "\u53bb\u516c\u56ed", example: "We often go to the park on weekends.", translation: "\u6211\u4eec\u5468\u672b\u7ecf\u5e38\u53bb\u516c\u56ed\u3002" },
+  { unit: "Unit 8", word: "go to the zoo", phonetic: "/\u0261\u0259\u028a tu \u00f0\u0259 zu\u02d0/", meaning: "\u53bb\u52a8\u7269\u56ed", example: "The children want to go to the zoo to see pandas.", translation: "\u5b69\u5b50\u4eec\u60f3\u53bb\u52a8\u7269\u56ed\u770b\u718a\u732b\u3002" },
+  { unit: "Unit 8", word: "go to the museum", phonetic: "/\u0261\u0259\u028a tu \u00f0\u0259 mju\u02c8zi\u02d0\u0259m/", meaning: "\u53bb\u535a\u7269\u9986", example: "We will go to the museum next week.", translation: "\u6211\u4eec\u4e0b\u5468\u8981\u53bb\u535a\u7269\u9986\u3002" },
+  { unit: "Unit 8", word: "elephant", phonetic: "/\u02c8el\u026af\u0259nt/", meaning: "\u8c61", example: "The elephant is very big and strong.", translation: "\u5927\u8c61\u53c8\u5927\u53c8\u5f3a\u58ee\u3002" },
+  { unit: "Unit 8", word: "film", phonetic: "/f\u026alm/", meaning: "\u7535\u5f71", example: "This is a very interesting film.", translation: "\u8fd9\u662f\u4e00\u90e8\u975e\u5e38\u6709\u8da3\u7684\u7535\u5f71\u3002" },
+  { unit: "Unit 8", word: "pizza", phonetic: "/\u02c8pi\u02d0ts\u0259/", meaning: "\u6bd4\u8428\u997c\uff1b\u610f\u5927\u5229\u997c", example: "I like eating pizza very much.", translation: "\u6211\u975e\u5e38\u559c\u6b22\u5403\u6bd4\u8428\u997c\u3002" },
+  { unit: "Unit 8", word: "shop", phonetic: "/\u0283\u0252p/", meaning: "\u5546\u5e97", example: "My mother often goes to the shop to buy food.", translation: "\u6211\u5988\u5988\u7ecf\u5e38\u53bb\u5546\u5e97\u4e70\u98df\u7269\u3002" },
+  { unit: "Unit 8", word: "eat", phonetic: "/i\u02d0t/", meaning: "\u5403", example: "We eat dinner at 7 o'clock every evening.", translation: "\u6211\u4eec\u6bcf\u5929\u665a\u4e0a7\u70b9\u5403\u665a\u996d\u3002" },
+  { unit: "Unit 8", word: "classmate", phonetic: "/\u02c8kl\u0251\u02d0sme\u026at/", meaning: "\u540c\u73ed\u540c\u5b66", example: "Tom is my good classmate.", translation: "\u6c64\u59c6\u662f\u6211\u7684\u597d\u540c\u73ed\u540c\u5b66\u3002" },
+  { unit: "Unit 8", word: "do a survey", phonetic: "/du\u02d0 \u0259 \u02c8s\u025c\u02d0ve\u026a/", meaning: "\u505a\u8c03\u67e5", example: "We need to do a survey about our classmates' hobbies.", translation: "\u6211\u4eec\u9700\u8981\u505a\u4e00\u4e2a\u5173\u4e8e\u540c\u5b66\u4eec\u7231\u597d\u7684\u8c03\u67e5\u3002" },
+  { unit: "Unit 8", word: "science museum", phonetic: "/\u02c8sa\u026a\u0259ns mju\u02c8zi\u02d0\u0259m/", meaning: "\u79d1\u6280\u9986", example: "We visited the science museum last Saturday.", translation: "\u4e0a\u5468\u516d\u6211\u4eec\u53c2\u89c2\u4e86\u79d1\u6280\u9986\u3002" },
+  { unit: "Days of the week", word: "Monday", phonetic: "/\u02c8m\u028cnde\u026a/", meaning: "\u661f\u671f\u4e00", example: "We go to school on Monday.", translation: "\u6211\u4eec\u661f\u671f\u4e00\u4e0a\u5b66\u3002" },
+  { unit: "Days of the week", word: "Tuesday", phonetic: "/\u02c8tju\u02d0zde\u026a/", meaning: "\u661f\u671f\u4e8c", example: "I have a music lesson on Tuesday.", translation: "\u6211\u661f\u671f\u4e8c\u6709\u4e00\u8282\u97f3\u4e50\u8bfe\u3002" },
+  { unit: "Days of the week", word: "Wednesday", phonetic: "/\u02c8wenzde\u026a/", meaning: "\u661f\u671f\u4e09", example: "We play football on Wednesday afternoon.", translation: "\u6211\u4eec\u661f\u671f\u4e09\u4e0b\u5348\u8e22\u8db3\u7403\u3002" },
+  { unit: "Days of the week", word: "Thursday", phonetic: "/\u02c8\u03b8\u025c\u02d0zde\u026a/", meaning: "\u661f\u671f\u56db", example: "I have an art lesson on Thursday.", translation: "\u6211\u661f\u671f\u56db\u6709\u4e00\u8282\u7f8e\u672f\u8bfe\u3002" },
+  { unit: "Days of the week", word: "Friday", phonetic: "/\u02c8fra\u026ade\u026a/", meaning: "\u661f\u671f\u4e94", example: "We are very happy on Friday.", translation: "\u661f\u671f\u4e94\u6211\u4eec\u5f88\u5f00\u5fc3\u3002" },
+  { unit: "Days of the week", word: "Saturday", phonetic: "/\u02c8s\u00e6t\u0259de\u026a/", meaning: "\u661f\u671f\u516d", example: "I often go to the park on Saturday.", translation: "\u6211\u661f\u671f\u516d\u7ecf\u5e38\u53bb\u516c\u56ed\u3002" },
+  { unit: "Days of the week", word: "Sunday", phonetic: "/\u02c8s\u028cnde\u026a/", meaning: "\u661f\u671f\u65e5", example: "We have a big dinner on Sunday evening.", translation: "\u6211\u4eec\u661f\u671f\u65e5\u665a\u4e0a\u5403\u4e00\u987f\u4e30\u76db\u7684\u665a\u9910\u3002" },
+  { unit: "Numbers", word: "one", phonetic: "/w\u028cn/", meaning: "\u4e00", example: "I have one book.", translation: "\u6211\u6709\u4e00\u672c\u4e66\u3002" },
+  { unit: "Numbers", word: "two", phonetic: "/tu\u02d0/", meaning: "\u4e8c", example: "There are two apples on the table.", translation: "\u684c\u5b50\u4e0a\u6709\u4e24\u4e2a\u82f9\u679c\u3002" },
+  { unit: "Numbers", word: "three", phonetic: "/\u03b8ri\u02d0/", meaning: "\u4e09", example: "I have three pens.", translation: "\u6211\u6709\u4e09\u652f\u94a2\u7b14\u3002" },
+  { unit: "Numbers", word: "four", phonetic: "/f\u0254\u02d0(r)/", meaning: "\u56db", example: "There are four seasons in a year.", translation: "\u4e00\u5e74\u6709\u56db\u4e2a\u5b63\u8282\u3002" },
+  { unit: "Numbers", word: "five", phonetic: "/fa\u026av/", meaning: "\u4e94", example: "I get up at five o'clock every morning.", translation: "\u6211\u6bcf\u5929\u65e9\u4e0a\u4e94\u70b9\u8d77\u5e8a\u3002" },
+  { unit: "Numbers", word: "six", phonetic: "/s\u026aks/", meaning: "\u516d", example: "There are six people in my family.", translation: "\u6211\u5bb6\u6709\u516d\u53e3\u4eba\u3002" },
+  { unit: "Numbers", word: "seven", phonetic: "/\u02c8sevn/", meaning: "\u4e03", example: "I go to school at seven o'clock.", translation: "\u6211\u4e03\u70b9\u949f\u53bb\u4e0a\u5b66\u3002" },
+  { unit: "Numbers", word: "eight", phonetic: "/e\u026at/", meaning: "\u516b", example: "There are eight stars on the blackboard.", translation: "\u9ed1\u677f\u4e0a\u6709\u516b\u9897\u661f\u661f\u3002" },
+  { unit: "Numbers", word: "nine", phonetic: "/na\u026an/", meaning: "\u4e5d", example: "I have nine toy cars.", translation: "\u6211\u6709\u4e5d\u8f86\u73a9\u5177\u8f66\u3002" },
+  { unit: "Numbers", word: "ten", phonetic: "/ten/", meaning: "\u5341", example: "Our classroom is on the tenth floor.", translation: "\u6211\u4eec\u7684\u6559\u5ba4\u5728\u5341\u697c\u3002" },
+  { unit: "Numbers", word: "eleven", phonetic: "/\u026a\u02c8levn/", meaning: "\u5341\u4e00", example: "I have eleven books in my schoolbag.", translation: "\u6211\u7684\u4e66\u5305\u91cc\u6709\u5341\u4e00\u672c\u4e66\u3002" },
+  { unit: "Numbers", word: "twelve", phonetic: "/twelv/", meaning: "\u5341\u4e8c", example: "There are twelve months in a year.", translation: "\u4e00\u5e74\u6709\u5341\u4e8c\u4e2a\u6708\u3002" },
+  { unit: "Numbers", word: "thirteen", phonetic: "/\u02cc\u03b8\u025c\u02d0\u02c8ti\u02d0n/", meaning: "\u5341\u4e09", example: "I am thirteen years old.", translation: "\u6211\u5341\u4e09\u5c81\u4e86\u3002" },
+  { unit: "Numbers", word: "fourteen", phonetic: "/\u02ccf\u0254\u02d0\u02c8ti\u02d0n/", meaning: "\u5341\u56db", example: "There are fourteen students in the classroom.", translation: "\u6559\u5ba4\u91cc\u6709\u5341\u56db\u4e2a\u5b66\u751f\u3002" },
+  { unit: "Numbers", word: "fifteen", phonetic: "/\u02ccf\u026af\u02c8ti\u02d0n/", meaning: "\u5341\u4e94", example: "I get home at fifteen past five.", translation: "\u6211\u4e94\u70b9\u5341\u4e94\u5206\u5230\u5bb6\u3002" },
+  { unit: "Numbers", word: "sixteen", phonetic: "/\u02ccs\u026aks\u02c8ti\u02d0n/", meaning: "\u5341\u516d", example: "There are sixteen flowers in the vase.", translation: "\u82b1\u74f6\u91cc\u6709\u5341\u516d\u6735\u82b1\u3002" },
+  { unit: "Numbers", word: "seventeen", phonetic: "/\u02ccsevn\u02c8ti\u02d0n/", meaning: "\u5341\u4e03", example: "I have seventeen crayons.", translation: "\u6211\u6709\u5341\u4e03\u652f\u8721\u7b14\u3002" },
+  { unit: "Numbers", word: "eighteen", phonetic: "/\u02cce\u026a\u02c8ti\u02d0n/", meaning: "\u5341\u516b", example: "There are eighteen chairs in the room.", translation: "\u623f\u95f4\u91cc\u6709\u5341\u516b\u628a\u6905\u5b50\u3002" },
+  { unit: "Numbers", word: "nineteen", phonetic: "/\u02ccna\u026an\u02c8ti\u02d0n/", meaning: "\u5341\u4e5d", example: "I have nineteen story books.", translation: "\u6211\u6709\u5341\u4e5d\u672c\u6545\u4e8b\u4e66\u3002" },
+  { unit: "Numbers", word: "twenty", phonetic: "/\u02c8twenti/", meaning: "\u4e8c\u5341", example: "There are twenty desks in our classroom.", translation: "\u6211\u4eec\u7684\u6559\u5ba4\u91cc\u6709\u4e8c\u5341\u5f20\u4e66\u684c\u3002" }
 ];
         
 
@@ -1589,7 +1675,9 @@ var o=[];var l=Array.isArray(e);for(f=n.s.c;f<=n.e.c;++f)s[f]=ya(f);for(var c=n.
             
             // 优先未学习的单词
             const unlearned = words.filter(w => w.repetitions === 0);
-            currentWord = (unlearned.length > 0 ? unlearned : words)[Math.floor(Math.random() * (unlearned.length > 0 ? unlearned.length : words.length))];
+            // 按顺序取第一个未学习的单词（保持Excel原始顺序）
+            const candidates = unlearned.length > 0 ? unlearned : words;
+            currentWord = candidates[0];
             displayWord(currentWord);
         }
         
